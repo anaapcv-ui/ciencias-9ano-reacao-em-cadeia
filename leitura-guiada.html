@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada — Reação em Cadeia | Ciências 9º ano</title>
+<style>
+:root{
+  --fundo:#0c0f14; --fundo2:#11151c; --card:#10141b; --card2:#151b24;
+  --texto:#d7dde6; --texto2:#8b95a4; --borda:#232a35;
+  --mat:#f5a742; --mat2:#ffcf7a; --vida:#3ddc84; --vida2:#7af0ae;
+  --ciano:#35d0e0; --alerta:#e0564b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--fundo);color:var(--texto);font-family:'Segoe UI',system-ui,Arial,sans-serif;line-height:1.7;padding-bottom:60px}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+header.top{background:linear-gradient(180deg,#121823,#0c0f14);border-bottom:2px solid var(--ciano);padding:22px 0 16px}
+.logo{font-size:2.3rem;letter-spacing:.04em;color:#fff;text-align:center;font-weight:800}
+.logo .c{color:var(--ciano)}
+.sub{text-align:center;color:var(--texto2);font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;margin-top:6px}
+.faixa{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:.76rem;color:var(--texto2);letter-spacing:.08em;text-transform:uppercase}
+nav.abas{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:16px 0 0}
+nav.abas a{display:block;padding:8px 14px;border:1px solid var(--borda);background:#131922;color:var(--texto2);text-decoration:none;font-size:.86rem;border-radius:7px}
+nav.abas a:hover{border-color:var(--ciano);color:var(--ciano)}
+nav.abas a.on{background:var(--ciano);color:#07222a;border-color:var(--ciano);font-weight:700}
+.painel{background:var(--card);border:1px solid var(--borda);border-left:4px solid var(--ciano);padding:14px;margin:20px 0;font-size:.9rem;border-radius:8px}
+.painel b{color:var(--ciano)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button{font-family:inherit;cursor:pointer;border:1px solid var(--borda);background:#19202b;color:var(--texto);padding:8px 14px;font-size:.85rem;border-radius:7px}
+button:hover{border-color:var(--ciano);color:var(--ciano)}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.pri{background:var(--ciano);color:#07222a;font-weight:700;border-color:var(--ciano)}
+button.pri:disabled{background:#2b4248;color:#7d8c92;border-color:#2b4248}
+.prog{height:9px;background:#1a212b;border:1px solid var(--borda);margin:14px 0;border-radius:6px;overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--mat),var(--vida));width:0;transition:width .4s}
+.secdiv{display:flex;align-items:center;gap:12px;margin:30px 0 4px}
+.secdiv .ln{flex:1;height:1px;background:var(--borda)}
+.secdiv .tt{font-size:1.15rem;font-weight:800;letter-spacing:.04em}
+.secdiv.mat .tt{color:var(--mat2)} .secdiv.vida .tt{color:var(--vida2)}
+.bloco{border:1px solid var(--borda);background:var(--card);margin:18px 0;position:relative;border-radius:10px;overflow:hidden}
+.bloco.trv{opacity:.5}
+.bloco.mat{border-top:4px solid var(--mat)} .bloco.vida{border-top:4px solid var(--vida)}
+.bhead{border-bottom:1px solid var(--borda);padding:14px 18px;background:var(--card2)}
+.belo{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase}
+.bloco.mat .belo{color:var(--mat)} .bloco.vida .belo{color:var(--vida)}
+.btag{display:inline-block;font-size:.64rem;letter-spacing:.12em;padding:2px 8px;border-radius:20px;text-transform:uppercase;margin-left:8px;vertical-align:middle}
+.bloco.mat .btag{border:1px solid var(--mat);color:var(--mat2)} .bloco.vida .btag{border:1px solid var(--vida);color:var(--vida2)}
+.btit{font-size:1.4rem;margin-top:6px;line-height:1.25}
+.bloco.mat .btit{color:var(--mat2)} .bloco.vida .btit{color:var(--vida2)}
+.bcap{font-size:.72rem;color:var(--texto2);margin-top:5px;letter-spacing:.06em}
+.bbody{padding:18px}
+.bbody p{margin-bottom:14px;text-align:justify}
+.bbody p strong{color:#fff}
+.bbody sub{font-size:.75em}
+.eq{font-family:'Consolas','Courier New',monospace;background:#0a0d12;border:1px solid var(--borda);border-radius:8px;padding:10px 12px;margin:12px 0;font-size:1.05rem;color:var(--mat2);text-align:center;letter-spacing:.02em}
+.eq sub{color:var(--mat2)}
+.cadeado{padding:26px 18px;text-align:center;color:var(--texto2);font-size:.9rem}
+.perg{border-top:1px dashed var(--borda);padding-top:16px;margin-top:8px}
+.pitem{margin-bottom:18px}
+.pnum{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ciano)}
+.ptxt{margin:6px 0 8px;font-size:1.02rem}
+.tipo{display:inline-block;font-size:.64rem;letter-spacing:.08em;padding:2px 7px;border:1px solid var(--borda);border-radius:20px;color:var(--texto2);margin-left:6px;text-transform:uppercase;vertical-align:middle}
+textarea{width:100%;min-height:82px;background:#0a0d12;color:var(--texto);border:1px solid var(--borda);padding:10px;font-family:inherit;font-size:.96rem;line-height:1.6;resize:vertical;border-radius:8px}
+textarea:focus{outline:none;border-color:var(--ciano)}
+.pitem.copia textarea{border-color:var(--alerta);background:#1c0f0d}
+.aviso{font-size:.84rem;padding:10px 12px;margin-top:8px;border-left:3px solid;display:none;border-radius:6px}
+.aviso.am{display:block;border-color:var(--mat);background:#241d10;color:var(--mat2)}
+.aviso.vm{display:block;border-color:var(--alerta);background:#1f100e;color:#f0998f}
+.modelo{display:none;margin-top:10px;border:1px solid var(--borda);background:#0f141b;padding:12px;border-radius:8px}
+.modelo.on{display:block}
+.modelo h5{font-size:.72rem;letter-spacing:.14em;color:var(--vida2);text-transform:uppercase;margin-bottom:6px}
+.modelo p{font-size:.95rem;margin-bottom:10px;text-align:left}
+.chk{border-top:1px dashed var(--borda);padding-top:10px}
+.chk h6{font-size:.72rem;letter-spacing:.1em;color:var(--ciano);text-transform:uppercase;margin-bottom:8px}
+.chkrow{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:.93rem}
+.chkrow span{flex:1}
+.chkrow button{padding:3px 12px;font-size:.78rem}
+.chkrow button.sim.on{background:var(--vida);color:#06220f;border-color:var(--vida);font-weight:700}
+.chkrow button.nao.on{background:var(--alerta);color:#fff;border-color:var(--alerta);font-weight:700}
+.status{font-size:.85rem;padding:10px 12px;margin-top:12px;display:none;border-radius:6px}
+.status.ok{display:block;background:#0e1f14;border-left:3px solid var(--vida);color:#9fe9bd}
+.status.rev{display:block;background:#241d10;border-left:3px solid var(--mat);color:var(--mat2)}
+.selo{position:absolute;top:12px;right:14px;font-size:.66rem;letter-spacing:.16em;border:2px solid var(--alerta);color:var(--alerta);padding:3px 8px;transform:rotate(-7deg);display:none;border-radius:6px}
+.selo.on{display:block}
+.caixa{border:2px solid var(--alerta);background:#180e0c;padding:18px;margin:26px 0;border-radius:10px}
+.caixa h3{color:#f0998f;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.caixa ol{margin-left:20px}
+.caixa li{margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.9rem}
+th,td{border:1px solid var(--borda);padding:8px 10px;text-align:left}
+th{background:#161c25;color:var(--ciano);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+h2.sec{color:#fff;font-size:1.35rem;margin:30px 0 4px;border-bottom:1px solid var(--borda);padding-bottom:8px}
+#revisar{border:1px solid var(--mat);background:#1a1710;padding:16px;margin:22px 0;border-radius:10px}
+#revisar h3{color:var(--mat2);font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+#revisar ul{margin-left:20px}
+#revisar li{margin-bottom:7px;font-size:.93rem}
+.fim{text-align:center;padding:26px 0;color:var(--texto2);font-size:.85rem}
+.fim a{color:var(--ciano)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px;z-index:99}
+.modal.on{display:flex}
+.modal .box{background:#121821;border:1px solid var(--ciano);padding:22px;max-width:420px;border-radius:10px}
+.modal h4{color:var(--ciano);margin-bottom:10px}
+.modal p{font-size:.9rem;margin-bottom:14px}
+@media(max-width:640px){.logo{font-size:1.6rem}.btit{font-size:1.15rem}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="logo">Reação em <span class="c">Cadeia</span></div>
+    <div class="sub">Instituto de Pesquisa &bull; Ala da Matéria + Ala da Vida</div>
+    <div class="faixa"><span>Ciências &bull; 9º ano</span><span>&bull;</span><span>Química cap. 10 + Biologia cap. 6</span><span>&bull;</span><span>Prova 15/10</span></div>
+    <nav class="abas">
+      <a href="index.html">🏠 Início</a>
+      <a href="leitura-guiada.html" class="on">📖 Leitura Guiada</a>
+      <a href="quiz.html">🎯 Quiz</a>
+      <a href="resumo.html">🗺️ Resumo</a>
+      <a href="simulado.html">📝 Simulado</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="painel">
+    <b>📖 Como funciona esta leitura.</b> O instituto tem duas alas ligadas pela mesma cadeia: a <b>Ala da Matéria</b> (Química) e a <b>Ala da Vida</b> (Biologia). Cada bloco é um <b>ELO</b>. Leia o ELO e responda às <b>3 perguntas escrevendo com as suas palavras</b>. O botão <b>Conferir</b> só libera com as 3 preenchidas. Depois de conferir, aparecem a resposta modelo e um checklist — e o ELO seguinte se abre.
+    <div style="margin-top:8px;color:var(--texto2)">Salvamento automático: <b id="quando">—</b></div>
+    <div class="btns">
+      <button onclick="exportar()">📥 Exportar</button>
+      <button onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+  <div class="prog"><i id="barra"></i></div>
+  <div id="blocos"></div>
+
+  <h2 class="sec">🚨 As 10 pegadinhas da prova</h2>
+  <div class="caixa">
+    <h3>Cuidado — é aqui que se perde ponto</h3>
+    <ol>
+      <li><strong>A Lei de Lavoisier só vale em sistema FECHADO.</strong> Num sistema aberto, gases podem entrar ou sair — por isso o papel queimado parece &ldquo;perder&rdquo; massa (saem gases) e o prego enferrujado parece &ldquo;ganhar&rdquo; (entra oxigênio). A massa total só se conserva se nada escapa nem entra.</li>
+      <li><strong>Lavoisier e Proust não falam da mesma coisa.</strong> Lavoisier é a <strong>massa total</strong> que se conserva (reagentes = produtos). Proust é a <strong>proporção fixa</strong> em que os elementos se combinam. Uma fala de soma, a outra de proporção.</li>
+      <li><strong>Reagente limitante x reagente em excesso.</strong> Quem acaba primeiro (o limitante) decide quanto de produto se forma; o que sobra é o excesso, que não reage. Se a conta &ldquo;não fecha&rdquo; na proporção, provavelmente há um reagente em excesso.</li>
+      <li><strong>Gay-Lussac é VOLUME de GASES, não massa</strong> — e só vale nas <strong>mesmas condições de temperatura e pressão</strong>. A relação entre os volumes é de números inteiros e pequenos (ex.: 2 : 1 : 2).</li>
+      <li><strong>Ao balancear, mexa só nos COEFICIENTES</strong> (os números grandes na frente), <strong>nunca nos índices</strong> das fórmulas. Trocar H<sub>2</sub>O por H<sub>2</sub>O<sub>2</sub> para &ldquo;fechar a conta&rdquo; muda a substância (vira água oxigenada).</li>
+      <li><strong>Biotecnologia não é só coisa moderna.</strong> O <em>termo</em> foi criado por Karl Ereky em 1917, mas a <em>prática</em> é milenar: pães, queijos e bebidas feitos com microrganismos já são biotecnologia.</li>
+      <li><strong>Decore as cores:</strong> VERMELHA = saúde, VERDE = agricultura, AZUL = recursos marinhos, BRANCA = indústria. A pegadinha clássica é o <strong>caranguejo-ferradura</strong> (sangue usado para detectar contaminação) — é biotecnologia <strong>azul</strong>.</li>
+      <li><strong>Transgênico recebe gene de OUTRA espécie.</strong> A técnica do DNA recombinante só funciona porque o DNA de <strong>todos os seres vivos tem a mesma composição química</strong> — por isso um gene de água-viva &ldquo;funciona&rdquo; num peixe.</li>
+      <li><strong>Totipotente ≠ pluripotente.</strong> Totipotente (mórula, até 32 células) forma qualquer tecido <strong>E os anexos</strong> (placenta, cordão). Pluripotente (blástula, até 64 células) forma qualquer tecido, <strong>mas NÃO os anexos</strong>.</li>
+      <li><strong>Dolly foi clonagem ARTIFICIAL</strong> (transplante de núcleo); <strong>gêmeos univitelinos são clonagem NATURAL</strong>. E a clonagem <strong>terapêutica NÃO implanta o embrião</strong> — ela só produz células-tronco e tecidos em laboratório.</li>
+    </ol>
+  </div>
+
+  <h2 class="sec">🗂️ Cobertura — Tópico → ELO</h2>
+  <table>
+    <tr><th>Tópico do conteúdo</th><th>Matéria</th><th>ELO</th></tr>
+    <tr><td>Reação química e Lei de Lavoisier (conservação das massas, sistema fechado)</td><td>Química — cap. 10</td><td>1</td></tr>
+    <tr><td>Lei de Proust (proporções constantes; reagente limitante e em excesso)</td><td>Química — cap. 10</td><td>2</td></tr>
+    <tr><td>Lei de Gay-Lussac (proporções volumétricas dos gases)</td><td>Química — cap. 10</td><td>3</td></tr>
+    <tr><td>Balanceamento de equações (método das tentativas)</td><td>Química — cap. 10</td><td>4</td></tr>
+    <tr><td>Biotecnologia: definição, histórico e as 4 cores</td><td>Biologia — cap. 6</td><td>5</td></tr>
+    <tr><td>Transgênicos e técnica do DNA recombinante</td><td>Biologia — cap. 6</td><td>6</td></tr>
+    <tr><td>Células-tronco: tipos e plasticidade</td><td>Biologia — cap. 6</td><td>7</td></tr>
+    <tr><td>Clonagem: natural e artificial, Dolly, reprodutiva e terapêutica</td><td>Biologia — cap. 6</td><td>8</td></tr>
+  </table>
+
+  <div id="revisar" style="display:none"><h3>🔁 Para revisar antes da prova</h3><ul id="revlista"></ul></div>
+  <div class="fim">Terminou a leitura? O próximo passo é o <a href="quiz.html">🎯 Quiz</a>.</div>
+</div>
+
+<div class="modal" id="mdl"><div class="box">
+  <h4 id="mdlt">Confirmar</h4><p id="mdlp">?</p>
+  <div class="btns"><button class="pri" onclick="mdlOk()">Sim, zerar</button><button onclick="fecharModal()">Cancelar</button></div>
+</div></div>
+
+<script>
+/* ===== armazenamento seguro ===== */
+var MEM={};
+function LS(){try{var t='__t';localStorage.setItem(t,'1');localStorage.removeItem(t);return localStorage;}catch(e){return null;}}
+var ST=LS();
+function getIt(k){try{return ST?ST.getItem(k):(MEM[k]||null);}catch(e){return MEM[k]||null;}}
+function setIt(k,v){try{if(ST){ST.setItem(k,v);}else{MEM[k]=v;}}catch(e){MEM[k]=v;}}
+function delIt(k){try{if(ST){ST.removeItem(k);}else{delete MEM[k];}}catch(e){delete MEM[k];}}
+var CHAVE='cie9_reacaoemcadeia_leitura';
+
+/* ===== conteúdo ===== */
+var BLOCOS=[
+{
+ id:1,ala:'mat',elo:"ELO 01",tag:"Ala da Matéria",cap:"Química — cap. 10 (Lei das reações químicas)",
+ tit:"Lei de Lavoisier: nada se perde, tudo se transforma",
+ txt:[
+ "Numa <strong>reação química</strong>, as substâncias que entram (os <strong>reagentes</strong>) se transformam em substâncias novas (os <strong>produtos</strong>). O que acontece, por dentro, é que os átomos se <strong>reorganizam</strong>: eles se separam e se juntam de outro jeito, mas não somem e não aparecem do nada. Guardar essa ideia é a chave para entender todo o capítulo.",
+ "Foi o cientista <strong>Lavoisier</strong>, no século XVIII, quem transformou isso em lei. Fazendo experiências em <strong>recipientes fechados</strong> (onde nada entra e nada sai), ele percebeu que a massa antes e depois da reação era sempre igual. Daí a frase famosa: <strong>&ldquo;na natureza nada se cria, nada se perde, tudo se transforma&rdquo;</strong>. Em linguagem de química: a <strong>soma das massas dos reagentes é igual à soma das massas dos produtos</strong>. É a Lei da Conservação das Massas.",
+ "Repare na expressão <strong>sistema fechado</strong> — ela é obrigatória. Se o sistema estiver <strong>aberto</strong>, um gás pode escapar ou entrar, e aí a balança engana. Quando você queima uma folha de papel numa vasilha aberta, a massa parece diminuir, mas é porque <strong>gases saíram</strong> para o ar. Quando um prego enferruja, parece ganhar massa, porque <strong>oxigênio do ar entrou</strong>. Se você fizer tudo num frasco lacrado, a massa total não muda.",
+ "Veja um exemplo de conta. O cálcio reage com o oxigênio e forma a cal. Se nessa reação <strong>40 g de cálcio</strong> se juntam a <strong>16 g de oxigênio</strong>, a massa de cal formada tem de ser 40 + 16 = <strong>56 g</strong>. E, de trás para frente: se a reação produziu 56 g de cal a partir de 16 g de oxigênio, a massa de cálcio que entrou foi 56 − 16 = 40 g. A conta sempre fecha."
+ ],
+ p:[
+  {q:"Explique, com as suas palavras, por que a Lei de Lavoisier só vale num SISTEMA FECHADO.",tipo:"conceitual",
+   m:"Porque a lei diz que a massa total não muda — mas isso só é verdade se nada entrar nem sair do sistema. Num sistema aberto, gases podem escapar (e a massa parece diminuir) ou o ar pode entrar e se combinar com a substância (e a massa parece aumentar). Só num recipiente fechado é possível garantir que toda a matéria que estava lá no começo continua lá no fim, e por isso a soma das massas se mantém igual.",
+   c:["Disse que num sistema fechado nada entra nem sai?","Deu um exemplo de gás saindo ou entrando (papel queimando, prego enferrujando) OU explicou que por isso a massa se conserva?"]},
+  {q:"Numa reação feita em sistema fechado, 12 g de carbono reagem totalmente com 32 g de oxigênio e formam gás carbônico. Qual é a massa de gás carbônico formada? Mostre a conta.",tipo:"aplicação",
+   m:"Pela Lei de Lavoisier, a massa dos produtos é igual à massa dos reagentes. Então basta somar: 12 g de carbono + 32 g de oxigênio = 44 g de gás carbônico. A massa de gás carbônico formada é 44 g.",
+   c:["Somou 12 + 32 chegando a 44 g?","Usou a ideia de que a massa dos produtos é igual à dos reagentes?"]},
+  {q:"Um colega queimou uma folha de papel numa vasilha aberta, viu a massa diminuir e disse: 'a Lei de Lavoisier está errada'. Escreva como você corrigiria essa afirmação.",tipo:"aplicação",
+   m:"Eu diria que a lei não está errada — o problema é que a experiência foi feita num sistema aberto. Quando o papel queima, parte da matéria vira gases (como gás carbônico e vapor de água) que escapam para o ar; por isso a massa que sobra na vasilha fica menor. Se o colega fizesse a mesma queima dentro de um frasco bem fechado, capturando esses gases, veria que a massa total continua a mesma — exatamente como a lei prevê.",
+   c:["Explicou que a experiência foi feita num sistema aberto e que gases escaparam?","Disse que, num sistema fechado, a massa total continuaria igual?"]}
+ ]
+},
+{
+ id:2,ala:'mat',elo:"ELO 02",tag:"Ala da Matéria",cap:"Química — cap. 10 (Lei das reações químicas)",
+ tit:"Lei de Proust: a proporção é sempre a mesma",
+ txt:[
+ "Se Lavoisier olhou para a <strong>massa total</strong>, o cientista <strong>Proust</strong> olhou para outra coisa: a <strong>proporção</strong> entre os elementos. A Lei de Proust (das proporções constantes, ou definidas) diz que uma substância pura tem <strong>sempre a mesma composição em massa</strong>, não importa de onde ela veio. Os elementos se combinam numa <strong>proporção fixa</strong>.",
+ "O exemplo campeão é a água. Ela se forma sempre na proporção de <strong>2 g de gás hidrogênio para 16 g de gás oxigênio</strong>, dando 18 g de água. Simplificando, isso é a mesma coisa que <strong>1 g de hidrogênio para 8 g de oxigênio</strong> (a proporção 1 : 8). Essa proporção não muda: a água do mar, da chuva ou feita em laboratório tem sempre a mesma composição.",
+ "Como a proporção é fixa, se você <strong>dobrar</strong> os reagentes, dobra o produto: 4 g de hidrogênio + 32 g de oxigênio formam 36 g de água. E se você triplicar, triplica — e assim por diante. É como uma receita de bolo: para fazer o dobro do bolo, você usa o dobro de cada ingrediente.",
+ "Mas e se os ingredientes não estiverem na proporção certa? Aí entra uma ideia importante. Imagine <strong>6 g de hidrogênio</strong> para <strong>32 g de oxigênio</strong>. A proporção 1 : 8 diz que 32 g de oxigênio só conseguem reagir com 4 g de hidrogênio. Logo, <strong>2 g de hidrogênio sobram</strong> sem reagir. Dizemos que o hidrogênio está <strong>em excesso</strong> e que o oxigênio é o <strong>reagente limitante</strong> — é ele que &ldquo;manda&rdquo; na quantidade de produto, porque acaba primeiro."
+ ],
+ p:[
+  {q:"A água se forma sempre na proporção de 1 g de hidrogênio para 8 g de oxigênio. Se 5 g de hidrogênio reagirem completamente, de quanto oxigênio você vai precisar e quanta água vai se formar? Mostre as contas.",tipo:"aplicação",
+   m:"Pela proporção 1 : 8, cada 1 g de hidrogênio precisa de 8 g de oxigênio. Então 5 g de hidrogênio precisam de 5 × 8 = 40 g de oxigênio. A massa de água é a soma dos dois (Lavoisier): 5 + 40 = 45 g de água. Resposta: 40 g de oxigênio e 45 g de água.",
+   c:["Multiplicou 5 × 8 para achar 40 g de oxigênio?","Somou 5 + 40 para achar 45 g de água?"]},
+  {q:"Numa experiência, juntaram 10 g de hidrogênio com 40 g de oxigênio (proporção da água: 1 : 8). Descubra qual reagente SOBRA e quanto sobra, e identifique o reagente limitante.",tipo:"aplicação",
+   m:"Para reagir com 40 g de oxigênio, pela proporção 1 : 8, são necessários 40 ÷ 8 = 5 g de hidrogênio. Como havia 10 g de hidrogênio, sobram 10 − 5 = 5 g de hidrogênio sem reagir. Portanto, o hidrogênio está em excesso (sobram 5 g) e o oxigênio é o reagente limitante, porque é ele que acaba primeiro e determina quanto de água se forma.",
+   c:["Calculou que 40 g de oxigênio exigem 5 g de hidrogênio e que sobram 5 g de hidrogênio?","Identificou o oxigênio como reagente limitante (e o hidrogênio como o que está em excesso)?"]},
+  {q:"Explique, com as suas palavras, a diferença entre o que diz a Lei de Lavoisier e o que diz a Lei de Proust.",tipo:"conceitual",
+   m:"A Lei de Lavoisier fala da massa TOTAL: a soma das massas dos reagentes é igual à soma das massas dos produtos, num sistema fechado. Já a Lei de Proust fala da PROPORÇÃO: os elementos sempre se combinam na mesma razão de massa para formar uma substância (por exemplo, 1 de hidrogênio para 8 de oxigênio na água). Uma é sobre quanto no total; a outra é sobre em que proporção.",
+   c:["Associou Lavoisier à conservação da massa total?","Associou Proust à proporção fixa de combinação dos elementos?"]}
+ ]
+},
+{
+ id:3,ala:'mat',elo:"ELO 03",tag:"Ala da Matéria",cap:"Química — cap. 10 (Lei das reações químicas)",
+ tit:"Lei de Gay-Lussac: a proporção dos gases em volume",
+ txt:[
+ "As leis de Lavoisier e Proust são chamadas de <strong>leis ponderais</strong>, porque tratam de <strong>massa</strong> (de &ldquo;peso&rdquo;). Mas existe outro tipo de lei, a <strong>lei volumétrica</strong>, que trata de <strong>volume</strong> — e vale só para <strong>gases</strong>.",
+ "A <strong>Lei de Gay-Lussac</strong> diz o seguinte: quando gases reagem entre si, <strong>nas mesmas condições de temperatura e pressão</strong>, os volumes dos gases reagentes e produtos têm entre si uma relação de <strong>números inteiros e pequenos</strong>. Ou seja, não dá qualquer número quebrado: dá uma proporção simples, como 2 para 1, ou 1 para 3.",
+ "O exemplo clássico é, de novo, a água. <strong>2 litros de gás hidrogênio</strong> reagem com <strong>1 litro de gás oxigênio</strong> e formam <strong>2 litros de vapor de água</strong>. A proporção em volume é <strong>2 : 1 : 2</strong> — números inteiros e pequenos, como a lei prevê.",
+ "Duas observações para não escorregar na prova. Primeira: essa lei fala de <strong>volume</strong>, não de massa — por isso ela é diferente das de Lavoisier e Proust. Segunda: ela só funciona para <strong>gases</strong> e só se eles estiverem <strong>nas mesmas condições de temperatura e pressão</strong>. Fora disso, a comparação de volumes não vale."
+ ],
+ p:[
+  {q:"Na formação do vapor de água, a proporção em volume é 2 L de hidrogênio : 1 L de oxigênio : 2 L de vapor. Se você usar 6 L de gás hidrogênio (reagindo totalmente), de quanto oxigênio vai precisar e quanto vapor de água vai se formar?",tipo:"aplicação",
+   m:"A proporção é 2 : 1 : 2. Como você usou 6 L de hidrogênio, que é 3 vezes os 2 L da proporção, basta multiplicar tudo por 3: oxigênio = 1 × 3 = 3 L; vapor de água = 2 × 3 = 6 L. Resposta: 3 L de oxigênio e 6 L de vapor de água.",
+   c:["Percebeu que 6 L de hidrogênio é 3 vezes a proporção e multiplicou por 3?","Chegou a 3 L de oxigênio e 6 L de vapor de água?"]},
+  {q:"Na síntese da amônia, 1 volume de gás nitrogênio reage com 3 volumes de gás hidrogênio e forma 2 volumes de amônia (proporção 1 : 3 : 2). Se reagirem 4 L de nitrogênio (totalmente), quanto de hidrogênio é preciso e quanto de amônia se forma?",tipo:"aplicação",
+   m:"A proporção é 1 : 3 : 2. Como entraram 4 L de nitrogênio, que é 4 vezes o 1 L da proporção, multiplico tudo por 4: hidrogênio = 3 × 4 = 12 L; amônia = 2 × 4 = 8 L. Resposta: 12 L de hidrogênio e 8 L de amônia.",
+   c:["Multiplicou a proporção por 4 (porque entraram 4 L de nitrogênio)?","Chegou a 12 L de hidrogênio e 8 L de amônia?"]},
+  {q:"Qual é a diferença principal entre as leis ponderais (como a de Lavoisier e a de Proust) e a lei volumétrica de Gay-Lussac? Escreva com as suas palavras.",tipo:"conceitual",
+   m:"As leis ponderais tratam de massa: falam de quanto cada substância 'pesa' na reação (massa total conservada, proporção fixa em massa). Já a lei volumétrica de Gay-Lussac trata de volume e vale só para gases, nas mesmas condições de temperatura e pressão: ela diz que os volumes dos gases guardam entre si uma proporção de números inteiros e pequenos.",
+   c:["Disse que as leis ponderais tratam de massa?","Disse que a de Gay-Lussac trata de volume de gases (nas mesmas condições de temperatura e pressão)?"]}
+ ]
+},
+{
+ id:4,ala:'mat',elo:"ELO 04",tag:"Ala da Matéria",cap:"Química — cap. 10 (Lei das reações químicas)",
+ tit:"Balanceamento: equilibrar os átomos dos dois lados",
+ txt:[
+ "Uma reação química pode ser escrita como uma <strong>equação</strong>: os reagentes de um lado, uma seta, e os produtos do outro. Mas, pela Lei de Lavoisier, os átomos não somem — então a equação só está &ldquo;certa&rdquo; quando tem o <strong>mesmo número de átomos de cada elemento dos dois lados</strong> da seta. Quando isso não acontece, dizemos que a equação está <strong>desbalanceada</strong>.",
+ "Balancear é ajustar os <strong>coeficientes</strong>: aqueles números grandes que ficam <strong>na frente</strong> das fórmulas e dizem quantas unidades de cada substância participam. Atenção à regra de ouro: você pode mudar os coeficientes, mas <strong>nunca</strong> os <strong>índices</strong> (os numerozinhos pequenos dentro da fórmula). Mudar o índice muda a própria substância.",
+ "Veja o caso da água. A equação H<sub>2</sub> + O<sub>2</sub> → H<sub>2</sub>O está desbalanceada (do lado esquerdo há 2 oxigênios e do direito, só 1). Ajustando os coeficientes, ela fica:",
+ "Um bom caminho (o <strong>método das tentativas</strong>): comece pelo elemento que aparece uma só vez em cada lado e com maior quantidade de átomos; deixe o <strong>hidrogênio e o oxigênio por último</strong>; e, no fim, <strong>confira</strong> contando os átomos de cada elemento nos dois lados. Outro exemplo já clássico é a síntese da amônia: N<sub>2</sub> + 3 H<sub>2</sub> → 2 NH<sub>3</sub> (2 nitrogênios e 6 hidrogênios de cada lado)."
+ ],
+ eq:["2 H<sub>2</sub> + O<sub>2</sub> &rarr; 2 H<sub>2</sub>O"],
+ eqpos:3,
+ p:[
+  {q:"Balanceie a equação e diga quais coeficientes você usou: N₂ + O₂ → NO₂.",tipo:"aplicação",
+   m:"A equação balanceada é N₂ + 2 O₂ → 2 NO₂. Conferindo: do lado esquerdo há 2 nitrogênios (do N₂) e 4 oxigênios (2 × O₂); do lado direito, 2 NO₂ dão 2 nitrogênios e 4 oxigênios. Os coeficientes usados são 1 (no N₂), 2 (no O₂) e 2 (no NO₂).",
+   c:["Chegou a N₂ + 2 O₂ → 2 NO₂ (coeficientes 1, 2 e 2)?","Conferiu que ficam 2 nitrogênios e 4 oxigênios dos dois lados?"]},
+  {q:"Balanceie: H₂ + Cl₂ → HCl. Depois explique por que você NÃO pode escrever H₂ + Cl₂ → H₂Cl₂ para 'fechar a conta' mais rápido.",tipo:"aplicação",
+   m:"A equação balanceada é H₂ + Cl₂ → 2 HCl (2 hidrogênios e 2 cloros de cada lado). Não posso escrever H₂Cl₂ porque isso mudaria o ÍNDICE da fórmula, ou seja, mudaria a substância: HCl é o ácido clorídrico, e H₂Cl₂ seria outra coisa, que nem existe assim. No balanceamento só se mexe nos coeficientes (os números na frente), nunca nos índices.",
+   c:["Chegou a H₂ + Cl₂ → 2 HCl?","Explicou que mudar o índice muda a substância, por isso só se pode mexer nos coeficientes?"]},
+  {q:"Explique, com as suas palavras, por que balancear uma equação é uma consequência direta da Lei de Lavoisier.",tipo:"conceitual",
+   m:"Porque a Lei de Lavoisier diz que, numa reação, nenhum átomo é criado nem destruído — eles só se reorganizam. Se nenhum átomo some nem aparece, então a quantidade de átomos de cada elemento tem de ser a mesma antes e depois da reação. Balancear é justamente garantir isso na equação: colocar coeficientes até que cada elemento tenha o mesmo número de átomos dos dois lados da seta.",
+   c:["Ligou a conservação dos átomos/massa à necessidade de ter o mesmo número de átomos dos dois lados?","Disse que balancear é garantir essa igualdade de átomos na equação?"]}
+ ]
+},
+{
+ id:5,ala:'vida',elo:"ELO 05",tag:"Ala da Vida",cap:"Biologia — cap. 6 (Biotecnologia)",
+ tit:"Biotecnologia: usar a vida para fabricar e modificar",
+ txt:[
+ "Segundo a <strong>ONU</strong>, <strong>biotecnologia</strong> é qualquer aplicação tecnológica que usa <strong>seres vivos</strong> (ou partes deles, os seus derivados) para <strong>fabricar ou modificar produtos ou processos</strong>. Ela aparece em quatro grandes áreas: <strong>saúde, agricultura, indústria e meio ambiente</strong>.",
+ "Pode parecer coisa de ficção científica, mas é bem antiga. Há milhares de anos a humanidade já usava microrganismos sem saber: para fazer <strong>pães, queijos e bebidas</strong> fermentadas. No fim do século XIX, <strong>Pasteur</strong> ajudou a entender o papel dos microrganismos. O <strong>termo</strong> &ldquo;biotecnologia&rdquo; foi criado por <strong>Karl Ereky, em 1917</strong>. E um marco gigante foi o <strong>Projeto Genoma Humano (1990–2003)</strong>, que sequenciou o DNA humano e abriu caminho para transgênicos, clonagem e células-tronco.",
+ "Para organizar tanta coisa, a biotecnologia é dividida por <strong>cores</strong>. A <strong>VERMELHA</strong> é a da <strong>saúde</strong>: remédios, vacinas e exames de diagnóstico. A <strong>VERDE</strong> é a da <strong>agricultura</strong>: sementes e plantas geneticamente modificadas. A <strong>BRANCA</strong> é a dos <strong>processos industriais</strong>.",
+ "A <strong>AZUL</strong> é a dos <strong>recursos biológicos do mar</strong>. Um exemplo curioso e muito cobrado: o <strong>sangue do caranguejo-ferradura</strong> (<em>Limulus polyphemus</em>) é usado para <strong>detectar contaminação</strong> em medicamentos e equipamentos médicos. Guarde esse caso: ele é o exemplo clássico da cor azul."
+ ],
+ p:[
+  {q:"Explique, com as suas palavras, o que é biotecnologia segundo a definição da ONU.",tipo:"conceitual",
+   m:"Biotecnologia é toda tecnologia que usa seres vivos, ou partes/derivados deles, para fabricar ou modificar produtos e processos. Ou seja, é aproveitar a 'vida' (microrganismos, plantas, animais, células, genes) como ferramenta para criar coisas úteis ou melhorar processos, em áreas como saúde, agricultura, indústria e meio ambiente.",
+   c:["Disse que usa seres vivos (ou seus derivados) para fabricar/modificar produtos ou processos?","Citou pelo menos uma das áreas (saúde, agricultura, indústria, meio ambiente) OU deu um exemplo?"]},
+  {q:"Classifique pela COR da biotecnologia (vermelha, verde, azul ou branca): (a) uma vacina nova; (b) uma planta modificada para resistir à seca; (c) usar o sangue do caranguejo-ferradura para detectar contaminação; (d) um processo industrial feito com microrganismos. Depois justifique UMA das suas respostas.",tipo:"aplicação",
+   m:"(a) vermelha, porque é saúde (vacina). (b) verde, porque é agricultura (planta modificada). (c) azul, porque usa um recurso biológico do mar (o caranguejo-ferradura). (d) branca, porque é um processo industrial. Justificativa possível: a vacina entra na cor vermelha porque a cor vermelha reúne tudo o que é da área da saúde — fármacos, vacinas e diagnósticos.",
+   c:["Acertou as quatro cores: a=vermelha, b=verde, c=azul, d=branca?","Justificou corretamente pelo menos uma das classificações?"]},
+  {q:"Muita gente pensa que biotecnologia é só coisa de laboratório moderno. Dê um exemplo ANTIGO de biotecnologia e explique por que ele se encaixa na definição.",tipo:"aplicação",
+   m:"Um exemplo antigo é a fabricação de pão, queijo ou bebidas fermentadas. Isso é biotecnologia porque usa seres vivos — os microrganismos, como fungos e bactérias — para fabricar ou transformar um produto (a massa que cresce, o leite que vira queijo, o suco que fermenta). Mesmo sem conhecer os microrganismos, as pessoas já aplicavam a ideia da definição: usar a vida para fabricar algo.",
+   c:["Deu um exemplo antigo válido (pão, queijo ou bebida fermentada)?","Explicou que usa microrganismos/seres vivos para fabricar ou modificar um produto?"]}
+ ]
+},
+{
+ id:6,ala:'vida',elo:"ELO 06",tag:"Ala da Vida",cap:"Biologia — cap. 6 (Biotecnologia)",
+ tit:"Transgênicos e a técnica do DNA recombinante",
+ txt:[
+ "Um organismo <strong>transgênico</strong> é aquele que recebeu um <strong>gene de outra espécie</strong> e, por causa disso, passa a apresentar a característica desse gene. A ferramenta que torna isso possível é a <strong>técnica do DNA recombinante (DNAr)</strong>: pegar um gene de uma espécie e inserir no genoma de outra.",
+ "Mas por que um gene de uma espécie &ldquo;funciona&rdquo; dentro de outra totalmente diferente? Porque o <strong>DNA de todos os seres vivos tem a mesma composição química</strong>. É a mesma &ldquo;linguagem&rdquo; molecular — por isso um gene de água-viva pode ser lido por um peixe. Para que <strong>todas as células</strong> do organismo (e os descendentes) sejam transgênicas, o gene deve ser inserido ainda no <strong>embrião</strong>: assim o gene também vai parar nos gametas e passa para os filhotes.",
+ "Os exemplos são muitos. Bactérias <strong>Escherichia coli</strong> transgênicas produzem <strong>insulina humana</strong> em larga escala (ótimo para quem tem diabetes). O <strong>arroz-dourado</strong> produz betacaroteno, precursor da vitamina A. Os peixes <strong>GloFish</strong> receberam o gene de uma proteína de água-viva (a GFP) e ficam <strong>fluorescentes sob luz ultravioleta</strong>. Há ainda soja, milho, trigo, tomate e mamão geneticamente modificados.",
+ "No Brasil, isso é regulado pela <strong>CTNBio</strong> e pela <strong>Lei de Biossegurança (11.105/2005)</strong>; produtos com mais de 1% de ingredientes transgênicos devem trazer o <strong>símbolo &ldquo;T&rdquo;</strong> (um triângulo amarelo). Há questões/riscos <strong>ambientais</strong>: perda de biodiversidade, <strong>poluição gênica</strong> (genes passando para espécies naturais), monopólio de sementes, surgimento de ervas daninhas e insetos super-resistentes, morte de polinizadores e mais agroquímicos. Sobre a saúde, porém, os estudos atuais indicam que <strong>consumir transgênicos não faz mal</strong>."
+ ],
+ p:[
+  {q:"Explique por que a técnica do DNA recombinante só é possível graças a uma característica que o DNA de TODOS os seres vivos tem em comum.",tipo:"conceitual",
+   m:"Porque o DNA de todos os seres vivos tem a mesma composição e estrutura química — é feito das mesmas peças e funciona pela mesma 'linguagem'. Por isso, um gene retirado de uma espécie pode ser inserido e lido no genoma de outra espécie bem diferente, e a célula consegue produzir a característica desse gene. Se cada ser vivo tivesse um DNA quimicamente diferente, o gene transferido não funcionaria no novo organismo.",
+   c:["Disse que o DNA de todos os seres vivos tem a mesma composição/estrutura química?","Ligou isso ao fato de um gene de uma espécie poder funcionar em outra?"]},
+  {q:"A insulina para diabéticos já foi retirada de animais; hoje, bactérias transgênicas produzem insulina humana. Explique a vantagem disso e como a bactéria passou a 'saber' produzir insulina humana.",tipo:"aplicação",
+   m:"A bactéria passou a produzir insulina humana porque recebeu, pela técnica do DNA recombinante, o gene humano responsável pela insulina — então ela 'lê' esse gene e fabrica a proteína. A vantagem é que se consegue produzir insulina humana em larga escala, de forma mais barata e idêntica à do corpo humano, em vez de depender da insulina extraída de animais, que não é exatamente igual e pode causar mais reações.",
+   c:["Explicou que a bactéria recebeu o gene humano da insulina (DNA recombinante)?","Citou uma vantagem (larga escala, insulina igual à humana, menos reações que a animal)?"]},
+  {q:"Um peixe GloFish brilha sob luz ultravioleta porque recebeu um gene de água-viva. Para que TODOS os filhotes dele também nasçam brilhantes, em que fase o gene precisa ter sido inserido? Explique por quê.",tipo:"aplicação",
+   m:"O gene precisa ter sido inserido ainda no embrião. É assim que todas as células do peixe passam a carregar o gene — inclusive os gametas (óvulos e espermatozoides). Como os descendentes se formam a partir desses gametas, eles também recebem o gene e nascem fluorescentes. Se o gene fosse colocado só em algumas células de um peixe já adulto, ele não passaria para os filhotes.",
+   c:["Disse que o gene deve ser inserido no embrião?","Explicou que assim o gene vai para os gametas e passa aos descendentes?"]}
+ ]
+},
+{
+ id:7,ala:'vida',elo:"ELO 07",tag:"Ala da Vida",cap:"Biologia — cap. 6 (Biotecnologia)",
+ tit:"Células-tronco: coringas que viram muitos tecidos",
+ txt:[
+ "As <strong>células-tronco</strong> são células <strong>indiferenciadas</strong> (ainda sem uma função definida) e com <strong>alto poder de replicação</strong>. Elas podem fazer duas coisas: gerar novas células-tronco <strong>ou</strong> se <strong>diferenciar</strong>, isto é, se transformar em vários tipos de célula e de tecido. Chamamos de <strong>plasticidade</strong> essa capacidade de diferenciação — quanto maior a plasticidade, em mais tecidos a célula pode se transformar.",
+ "Elas são classificadas pelo seu <strong>potencial</strong>. As <strong>TOTIPOTENTES</strong> aparecem no embrião na fase de mórula (até 32 células): formam <strong>qualquer</strong> célula ou tecido <strong>e também os anexos embrionários</strong>, como a placenta e o cordão umbilical. As <strong>PLURIPOTENTES</strong> aparecem um pouco depois, na fase de blástula/blastocisto (até 64 células): formam qualquer tecido, <strong>mas NÃO os anexos</strong>.",
+ "Já as <strong>MULTIPOTENTES (ou oligopotentes)</strong> vêm de tecidos adultos já formados — como a <strong>medula óssea</strong>, o cordão e o tecido adiposo — e formam só <strong>alguns</strong> tipos de célula. As <strong>UNIPOTENTES</strong>, também de origem adulta, formam apenas <strong>um</strong> tipo. Existem ainda as <strong>iPS</strong>, as pluripotentes <strong>induzidas</strong>: são células adultas &ldquo;reprogramadas&rdquo; de volta ao estágio embrionário.",
+ "As <strong>embrionárias</strong> são as mais promissoras para tratar doenças degenerativas, justamente porque são pluri ou totipotentes (formam muita coisa). Mas o uso delas gera um <strong>dilema ético</strong>: para extraí-las, inviabiliza-se o embrião. As aplicações estudadas incluem a medula óssea (sistema imune e câncer), Alzheimer, Parkinson, diabetes, e tecidos cardíaco, renal e hepático."
+ ],
+ p:[
+  {q:"O que torna uma célula-tronco diferente de uma célula comum já especializada, como uma célula da pele?",tipo:"conceitual",
+   m:"A célula-tronco é indiferenciada, ou seja, ainda não tem uma função fixa, e tem alto poder de replicação. Por causa disso, ela pode gerar novas células-tronco ou se transformar em vários tipos de célula e tecido (tem plasticidade). Já a célula da pele é diferenciada: ela já 'escolheu' sua função e não vira outros tipos de tecido.",
+   c:["Disse que a célula-tronco é indiferenciada e/ou tem alto poder de replicação?","Disse que ela pode se diferenciar em vários tipos de célula/tecido (plasticidade), diferente da célula já especializada?"]},
+  {q:"Compare, com as suas palavras, uma célula TOTIPOTENTE e uma PLURIPOTENTE: em que fase do embrião cada uma aparece e o que uma faz que a outra NÃO faz.",tipo:"aplicação",
+   m:"A totipotente aparece na fase de mórula (até 32 células) e consegue formar qualquer tecido e também os anexos embrionários, como a placenta e o cordão umbilical. A pluripotente aparece na fase de blástula/blastocisto (até 64 células) e forma qualquer tecido do corpo, MAS não forma os anexos embrionários. Ou seja, a diferença é que a totipotente forma os anexos (placenta, cordão) e a pluripotente não.",
+   c:["Associou a totipotente à mórula e a pluripotente à blástula/blastocisto?","Disse que a totipotente forma os anexos (placenta/cordão) e a pluripotente NÃO?"]},
+  {q:"As células-tronco embrionárias são as mais promissoras para tratar doenças, mas o uso delas gera um dilema ético. Explique qual é esse dilema.",tipo:"aplicação",
+   m:"O dilema é que, para obter as células-tronco embrionárias, é preciso extraí-las do embrião — e essa extração inviabiliza (destrói) o embrião. Então, de um lado, essas células poderiam ajudar a tratar muitas doenças graves; de outro, usá-las significa impedir o desenvolvimento de um embrião, o que levanta uma discussão ética sobre até onde é certo ir.",
+   c:["Explicou que extrair as células-tronco embrionárias inviabiliza/destrói o embrião?","Mostrou que é um conflito entre o benefício do tratamento e o respeito ao embrião?"]}
+ ]
+},
+{
+ id:8,ala:'vida',elo:"ELO 08",tag:"Ala da Vida",cap:"Biologia — cap. 6 (Biotecnologia)",
+ tit:"Clonagem: cópias geneticamente idênticas",
+ txt:[
+ "<strong>Clonagem</strong> é um processo de reprodução <strong>assexuada</strong> (natural ou artificial) que produz organismos <strong>geneticamente idênticos</strong> ao original. Ou seja, o clone tem o mesmo DNA do ser do qual veio.",
+ "Na natureza, isso já acontece. São exemplos de clonagem <strong>natural</strong>: a <strong>bipartição</strong>, o <strong>brotamento</strong>, a <strong>regeneração</strong> e os <strong>gêmeos univitelinos</strong> (que vêm de um mesmo embrião e, por isso, têm DNA idêntico). Já a clonagem <strong>artificial</strong> é feita em laboratório pela técnica do <strong>transplante de núcleo</strong>: retira-se o núcleo de um ovócito e coloca-se no lugar o núcleo de uma célula adulta do indivíduo que se quer clonar.",
+ "O caso mais famoso é a <strong>ovelha Dolly (1996, Instituto Roslin, Escócia)</strong>, o primeiro mamífero clonado. O processo envolveu <strong>três ovelhas</strong> (a doadora do núcleo, a doadora do ovócito e a &ldquo;barriga de aluguel&rdquo;) e cerca de <strong>277 embriões</strong> — só Dolly vingou. E ela ainda apresentou <strong>envelhecimento precoce</strong>.",
+ "Existem dois <strong>tipos</strong> de clonagem: a <strong>reprodutiva</strong>, que serve para gerar novos organismos (plantas, animais), e a <strong>terapêutica</strong>, que produz células-tronco e tecidos em laboratório, <strong>sem implantar o embrião</strong>. As <strong>desvantagens</strong> da clonagem são a baixa taxa de sucesso, anomalias, envelhecimento precoce e lesões ou tumores. Todas essas questões — transgênicos, clonagem, embriões, células-tronco — fazem parte da <strong>bioética</strong>, que discute os limites éticos do que a ciência pode fazer."
+ ],
+ p:[
+  {q:"Gêmeos univitelinos são um exemplo de clonagem NATURAL, enquanto a ovelha Dolly é de clonagem ARTIFICIAL. Explique por que os gêmeos entram como 'clones' e o que foi diferente no caso da Dolly.",tipo:"aplicação",
+   m:"Os gêmeos univitelinos são considerados clones porque vêm de um mesmo embrião que se dividiu, então os dois têm exatamente o mesmo DNA — são geneticamente idênticos, sem que ninguém tenha feito isso de propósito (por isso é natural). No caso da Dolly, a clonagem foi artificial: feita em laboratório pela técnica do transplante de núcleo, em que se colocou o núcleo de uma célula adulta de uma ovelha dentro de um ovócito, para gerar uma cópia idêntica dessa ovelha.",
+   c:["Explicou que os gêmeos univitelinos têm o mesmo DNA (vêm do mesmo embrião), por isso são clones naturais?","Disse que a Dolly foi feita em laboratório por transplante de núcleo (clonagem artificial)?"]},
+  {q:"Qual é a diferença entre clonagem reprodutiva e clonagem terapêutica? Escreva com as suas palavras.",tipo:"conceitual",
+   m:"A clonagem reprodutiva tem como objetivo gerar um novo organismo completo, como uma planta ou um animal (foi o caso da Dolly). Já a clonagem terapêutica não quer gerar um novo ser: ela serve para produzir células-tronco e tecidos em laboratório, para tratar doenças, e NÃO implanta o embrião. A diferença principal é o objetivo: uma cria um organismo novo, a outra produz células/tecidos para tratamento.",
+   c:["Disse que a reprodutiva gera um novo organismo?","Disse que a terapêutica produz células-tronco/tecidos em laboratório, sem implantar o embrião?"]},
+  {q:"A clonagem da Dolly envolveu cerca de 277 embriões e só um deu certo, e ela ainda apresentou envelhecimento precoce. Use esses dados para explicar duas desvantagens da clonagem.",tipo:"aplicação",
+   m:"Primeira desvantagem: a baixa taxa de sucesso — foram necessários cerca de 277 embriões e apenas um (a Dolly) se desenvolveu, mostrando que o processo falha muito. Segunda desvantagem: os problemas de saúde do clone, como o envelhecimento precoce que a Dolly apresentou (além de anomalias, lesões e tumores que podem ocorrer). Ou seja, além de dar errado quase sempre, quando dá certo o clone pode nascer com problemas.",
+   c:["Citou a baixa taxa de sucesso usando o dado dos ~277 embriões / só um deu certo?","Citou o envelhecimento precoce (ou anomalias/lesões/tumores) como segunda desvantagem?"]}
+ ]
+}
+];
+
+/* ===== estado ===== */
+var D={blocos:{},aberto:1};
+function salvar(){
+  D.quando=new Date().toLocaleString('pt-BR');
+  setIt(CHAVE,JSON.stringify(D));
+  var q=document.getElementById('quando'); if(q) q.textContent=D.quando;
+}
+function carregar(){
+  var r=getIt(CHAVE);
+  if(r){ try{ var o=JSON.parse(r); if(o&&typeof o==='object'){ D=o; if(!D.blocos)D.blocos={}; if(!D.aberto)D.aberto=1; } }catch(e){} }
+  var q=document.getElementById('quando'); if(q) q.textContent=D.quando||'ainda não salvo';
+}
+function est(id){
+  if(!D.blocos[id]) D.blocos[id]={resp:['','',''],feito:false,transcrita:[false,false,false],tentou:['','',''],chk:{}};
+  var b=D.blocos[id];
+  if(!b.resp) b.resp=['','',''];
+  if(!b.transcrita) b.transcrita=[false,false,false];
+  if(!b.tentou) b.tentou=['','',''];
+  if(!b.chk) b.chk={};
+  return b;
+}
+
+/* ===== anticópia ===== */
+function norm(s){
+  return (s||'').toLowerCase()
+   .normalize('NFD').replace(/[̀-ͯ]/g,'')
+   .replace(/[^a-z0-9\s]/g,' ')
+   .replace(/\s+/g,' ').trim();
+}
+function pal(s){ var n=norm(s); return n?n.split(' '):[]; }
+function seqComuns(a,b,min){
+  var cob={},i,j,k;
+  var bs=b.join(' ');
+  for(i=0;i<a.length;i++){
+    for(j=a.length;j>i+min-1;j--){
+      var tr=a.slice(i,j).join(' ');
+      if(tr.length>2 && bs.indexOf(tr)!==-1){
+        for(k=i;k<j;k++) cob[k]=true;
+        i=j-1; break;
+      }
+    }
+  }
+  return cob;
+}
+function maiorSeq(a,b){
+  var bs=b.join(' '),mx=0,i,j;
+  for(i=0;i<a.length;i++){
+    for(j=a.length;j>i+mx;j--){
+      var tr=a.slice(i,j).join(' ');
+      if(tr.length>2 && bs.indexOf(tr)!==-1){ if(j-i>mx) mx=j-i; break; }
+    }
+  }
+  return mx;
+}
+function ehTranscrita(resp,textoBloco,enunciado){
+  var r=pal(resp);
+  if(r.length<8) return false;
+  var en=pal(enunciado);
+  var cobEn=seqComuns(r,en,4);
+  var rest=[];
+  for(var i=0;i<r.length;i++){ if(!cobEn[i]) rest.push(r[i]); }
+  if(rest.length<8) return false;
+  var tb=pal(textoBloco);
+  if(maiorSeq(rest,tb)>=12) return true;
+  var cob=seqComuns(rest,tb,6);
+  var n=0; for(var k in cob){ if(cob.hasOwnProperty(k)) n++; }
+  return (n/rest.length)>0.75;
+}
+
+/* ===== render ===== */
+function textoPuro(b){
+  var d=document.createElement('div'); d.innerHTML=b.txt.join(' ');
+  return d.textContent||d.innerText||'';
+}
+function buscaBloco(id){ for(var i=0;i<BLOCOS.length;i++){ if(BLOCOS[i].id===id) return BLOCOS[i]; } return null; }
+function render(){
+  var c=document.getElementById('blocos'); c.innerHTML='';
+  for(var i=0;i<BLOCOS.length;i++){
+    var b=BLOCOS[i], e=est(b.id), liberado=(b.id<=D.aberto);
+    if(b.id===1){ c.appendChild(divSec('mat','🧪 Ala da Matéria — Química (cap. 10)')); }
+    if(b.id===5){ c.appendChild(divSec('vida','🧬 Ala da Vida — Biologia (cap. 6)')); }
+    var d=document.createElement('div');
+    d.className='bloco '+b.ala+(liberado?'':' trv'); d.id='bl'+b.id;
+    var h='<div class="selo" id="selo'+b.id+'">Revisar</div>'+
+      '<div class="bhead"><div class="belo">'+b.elo+' <span class="btag">'+b.tag+'</span></div>'+
+      '<div class="btit">'+b.tit+'</div><div class="bcap">'+b.cap+'</div></div>';
+    if(!liberado){
+      h+='<div class="cadeado">🔒 Este ELO abre depois que você conferir o anterior.</div>';
+    }else{
+      h+='<div class="bbody">';
+      for(var p=0;p<b.txt.length;p++){
+        h+='<p>'+b.txt[p]+'</p>';
+        if(b.eq && b.eqpos===p+1){ for(var q0=0;q0<b.eq.length;q0++) h+='<div class="eq">'+b.eq[q0]+'</div>'; }
+      }
+      h+='<div class="perg">';
+      for(var q=0;q<b.p.length;q++){
+        var pg=b.p[q], marc=e.transcrita[q];
+        h+='<div class="pitem'+(marc?' copia':'')+'" id="pi'+b.id+'_'+q+'">'+
+           '<div class="pnum">Pergunta '+(q+1)+' <span class="tipo">'+pg.tipo+'</span></div>'+
+           '<div class="ptxt">'+pg.q+'</div>'+
+           '<textarea id="ta'+b.id+'_'+q+'" oninput="mudou('+b.id+','+q+')" placeholder="Escreva aqui, com as suas palavras...">'+(e.resp[q]||'')+'</textarea>'+
+           '<div class="aviso" id="av'+b.id+'_'+q+'"></div>'+
+           '<div class="modelo" id="md'+b.id+'_'+q+'"><h5>Resposta modelo</h5><p>'+pg.m+'</p>'+
+           '<div class="chk"><h6>A minha resposta disse que...</h6>'+chkHtml(b.id,q,pg.c)+'</div></div>'+
+           '</div>';
+      }
+      h+='<button class="pri" id="cf'+b.id+'" onclick="conferir('+b.id+')">✔️ Conferir o '+b.elo+'</button>'+
+         '<div class="status" id="st'+b.id+'"></div>';
+      h+='</div></div>';
+    }
+    d.innerHTML=h; c.appendChild(d);
+  }
+  for(var i2=0;i2<BLOCOS.length;i2++){
+    var bb=BLOCOS[i2], ee=est(bb.id);
+    if(bb.id<=D.aberto && ee.feito) mostrarConferido(bb.id,false);
+    if(bb.id<=D.aberto) attCf(bb.id);
+  }
+  attBarra(); attRevisar();
+}
+function divSec(cls,txt){
+  var s=document.createElement('div'); s.className='secdiv '+cls;
+  s.innerHTML='<div class="ln"></div><div class="tt">'+txt+'</div><div class="ln"></div>';
+  return s;
+}
+function chkHtml(id,q,pontos){
+  var e=est(id),h='';
+  for(var i=0;i<pontos.length;i++){
+    var v=(e.chk[q+'_'+i]!==undefined)?e.chk[q+'_'+i]:null;
+    h+='<div class="chkrow"><span>'+pontos[i]+'</span>'+
+       '<button class="sim'+(v===true?' on':'')+'" onclick="marcar('+id+','+q+','+i+',true)">Sim</button>'+
+       '<button class="nao'+(v===false?' on':'')+'" onclick="marcar('+id+','+q+','+i+',false)">Não</button></div>';
+  }
+  return h;
+}
+function mudou(id,q){
+  var e=est(id), ta=document.getElementById('ta'+id+'_'+q);
+  e.resp[q]=ta.value;
+  if(e.transcrita[q]){
+    var b=buscaBloco(id);
+    if(!ehTranscrita(ta.value,textoPuro(b),b.p[q].q)){
+      e.transcrita[q]=false;
+      document.getElementById('pi'+id+'_'+q).className='pitem';
+      var av=document.getElementById('av'+id+'_'+q); av.className='aviso'; av.textContent='';
+      attSelo(id); attRevisar();
+    }
+  }
+  attCf(id); salvar();
+}
+function attCf(id){
+  var btn=document.getElementById('cf'+id); if(!btn) return;
+  var ok=true;
+  for(var q=0;q<3;q++){
+    var ta=document.getElementById('ta'+id+'_'+q);
+    if(!ta || ta.value.trim().length<3) ok=false;
+  }
+  btn.disabled=!ok;
+}
+function conferir(id){
+  var b=buscaBloco(id), e=est(id), tp=textoPuro(b), travou=false;
+  for(var q=0;q<3;q++){
+    var ta=document.getElementById('ta'+id+'_'+q), av=document.getElementById('av'+id+'_'+q);
+    var v=ta.value, copia=ehTranscrita(v,tp,b.p[q].q);
+    if(copia){
+      if(!e.tentou[q]){
+        e.tentou[q]=v;
+        av.className='aviso am';
+        av.innerHTML='✏️ <b>Boa parte da sua resposta está igual ao texto.</b> Tente reescrever com as suas palavras — explique como se fosse para um amigo, sem olhar o texto. Pode ficar mais curto e simples; o que vale é ser <b>seu</b>.';
+        travou=true;
+      }else if(v===e.tentou[q]){
+        av.className='aviso am';
+        av.innerHTML='✏️ A resposta continua igual à anterior. <b>Mude alguma coisa</b> antes de conferir de novo.';
+        travou=true;
+      }else{
+        e.transcrita[q]=true;
+        document.getElementById('pi'+id+'_'+q).className='pitem copia';
+        av.className='aviso vm';
+        av.innerHTML='📌 <b>Esta resposta ficou muito parecida com o texto.</b> Ela foi aceita, mas entrou na lista &ldquo;para revisar&rdquo;. Reescreva com as suas palavras quando quiser — a marca some sozinha.';
+      }
+    }else{
+      e.transcrita[q]=false;
+      document.getElementById('pi'+id+'_'+q).className='pitem';
+      av.className='aviso'; av.innerHTML='';
+    }
+  }
+  salvar();
+  if(travou){ attSelo(id); attRevisar(); return; }
+  e.feito=true;
+  if(D.aberto<id+1 && id<BLOCOS.length) D.aberto=id+1;
+  salvar(); render();
+  var el=document.getElementById('bl'+id); if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function mostrarConferido(id,scroll){
+  var e=est(id);
+  for(var q=0;q<3;q++){
+    var md=document.getElementById('md'+id+'_'+q); if(md) md.className='modelo on';
+    if(e.transcrita[q]){
+      var pi=document.getElementById('pi'+id+'_'+q); if(pi) pi.className='pitem copia';
+      var av=document.getElementById('av'+id+'_'+q);
+      if(av){ av.className='aviso vm'; av.innerHTML='📌 <b>Esta resposta ficou muito parecida com o texto.</b> Reescreva com as suas palavras quando quiser — a marca some sozinha.'; }
+    }
+  }
+  attStatus(id); attSelo(id);
+}
+function marcar(id,q,i,val){
+  var e=est(id); e.chk[q+'_'+i]=val; salvar();
+  var md=document.getElementById('md'+id+'_'+q);
+  if(md){ var b=buscaBloco(id); md.querySelector('.chk').innerHTML='<h6>A minha resposta disse que...</h6>'+chkHtml(id,q,b.p[q].c); }
+  attStatus(id); attSelo(id); attRevisar();
+}
+function blocoOk(id){
+  var b=buscaBloco(id), e=est(id);
+  for(var q=0;q<3;q++){
+    if(e.transcrita[q]) return false;
+    for(var i=0;i<b.p[q].c.length;i++){
+      if(e.chk[q+'_'+i]!==true) return false;
+    }
+  }
+  return true;
+}
+function attStatus(id){
+  var st=document.getElementById('st'+id); if(!st) return;
+  var e=est(id); if(!e.feito){ st.className='status'; return; }
+  if(blocoOk(id)){ st.className='status ok'; st.innerHTML='✅ <b>ELO fechado.</b> Você deu conta dos pontos-chave deste elo.'; }
+  else{ st.className='status rev'; st.innerHTML='🔁 <b>Vale revisar.</b> Ficou algum ponto marcado como &ldquo;Não&rdquo; ou alguma resposta muito parecida com o texto — está na lista do fim da página.'; }
+}
+function attSelo(id){
+  var s=document.getElementById('selo'+id); if(!s) return;
+  var e=est(id);
+  s.className='selo'+((e.feito&&!blocoOk(id))?' on':'');
+}
+function attBarra(){
+  var n=0; for(var i=0;i<BLOCOS.length;i++){ if(est(BLOCOS[i].id).feito) n++; }
+  document.getElementById('barra').style.width=(n/BLOCOS.length*100)+'%';
+}
+function attRevisar(){
+  var box=document.getElementById('revisar'), ul=document.getElementById('revlista');
+  ul.innerHTML=''; var tem=false;
+  for(var i=0;i<BLOCOS.length;i++){
+    var b=BLOCOS[i], e=est(b.id); if(!e.feito) continue;
+    for(var q=0;q<3;q++){
+      var motivos=[];
+      if(e.transcrita[q]) motivos.push('resposta muito parecida com o texto');
+      var faltou=[];
+      for(var k=0;k<b.p[q].c.length;k++){ if(e.chk[q+'_'+k]===false) faltou.push(b.p[q].c[k]); }
+      if(faltou.length) motivos.push('faltou: '+faltou.join(' / '));
+      if(motivos.length){
+        tem=true;
+        var li=document.createElement('li');
+        li.innerHTML='<b>'+b.elo+', pergunta '+(q+1)+'</b> ('+b.tit+') — '+motivos.join('; ');
+        ul.appendChild(li);
+      }
+    }
+  }
+  box.style.display=tem?'block':'none';
+  attBarra();
+}
+
+/* ===== export / import / zerar ===== */
+function exportar(){
+  var out={material:'Leitura Guiada',kit:'Reação em Cadeia — Ciências 9º ano',quando:D.quando||'',aberto:D.aberto,blocos:{}};
+  for(var i=0;i<BLOCOS.length;i++){
+    var b=BLOCOS[i], e=est(b.id);
+    var qs=[];
+    for(var q=0;q<3;q++){
+      var ch={};
+      for(var k=0;k<b.p[q].c.length;k++){ ch[b.p[q].c[k]]=(e.chk[q+'_'+k]===undefined?null:e.chk[q+'_'+k]); }
+      qs.push({pergunta:b.p[q].q,resp:e.resp[q]||'',transcrita:!!e.transcrita[q],tentou:e.tentou[q]||'',chk:ch});
+    }
+    out.blocos['elo_'+b.id]={titulo:b.tit,materia:b.cap,feito:!!e.feito,status:(e.feito?(blocoOk(b.id)?'ok':'revisar'):'não feito'),perguntas:qs};
+  }
+  var bl=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(bl);
+  a.download='leitura-guiada-ciencias9.json'; a.click();
+}
+function importar(ev){
+  var f=ev.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(x){
+    try{
+      var o=JSON.parse(x.target.result);
+      if(o&&o.blocos){
+        for(var i=0;i<BLOCOS.length;i++){
+          var b=BLOCOS[i], src=o.blocos['elo_'+b.id]; if(!src) continue;
+          var e=est(b.id); e.feito=!!src.feito;
+          if(src.perguntas){
+            for(var q=0;q<src.perguntas.length&&q<3;q++){
+              var sp=src.perguntas[q];
+              e.resp[q]=sp.resp||''; e.transcrita[q]=!!sp.transcrita; e.tentou[q]=sp.tentou||'';
+              if(sp.chk){ var idx=0; for(var key in sp.chk){ if(sp.chk.hasOwnProperty(key)){ e.chk[q+'_'+idx]=sp.chk[key]; idx++; } } }
+            }
+          }
+        }
+        if(o.aberto) D.aberto=o.aberto;
+        salvar(); render();
+      }
+    }catch(e){}
+  };
+  r.readAsText(f); ev.target.value='';
+}
+var acaoModal=null;
+function pedirZerar(){
+  acaoModal=function(){ delIt(CHAVE); D={blocos:{},aberto:1}; salvar(); render(); fecharModal(); };
+  document.getElementById('mdlt').textContent='Zerar tudo?';
+  document.getElementById('mdlp').textContent='Isso apaga todas as respostas desta Leitura Guiada. Não dá para desfazer.';
+  document.getElementById('mdl').className='modal on';
+}
+function mdlOk(){ if(acaoModal) acaoModal(); }
+function fecharModal(){ document.getElementById('mdl').className='modal'; acaoModal=null; }
+
+carregar(); render();
+</script>
+</body>
+</html>
