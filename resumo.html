@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo — Reação em Cadeia | Ciências 9º ano</title>
+<style>
+:root{--fundo:#0c0f14;--card:#10141b;--card2:#151b24;--texto:#d7dde6;--texto2:#8b95a4;--borda:#232a35;--mat:#f5a742;--mat2:#ffcf7a;--vida:#3ddc84;--vida2:#7af0ae;--ciano:#35d0e0;--alerta:#e0564b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--fundo);color:var(--texto);font-family:'Segoe UI',system-ui,Arial,sans-serif;line-height:1.7;padding-bottom:60px}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+header.top{background:linear-gradient(180deg,#121823,#0c0f14);border-bottom:2px solid var(--ciano);padding:22px 0 16px}
+.logo{font-size:2.1rem;letter-spacing:.04em;color:#fff;text-align:center;font-weight:800}
+.logo .c{color:var(--ciano)}
+.sub{text-align:center;color:var(--texto2);font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;margin-top:6px}
+nav.abas{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:16px 0 0}
+nav.abas a{padding:8px 14px;border:1px solid var(--borda);background:#131922;color:var(--texto2);text-decoration:none;font-size:.86rem;border-radius:7px}
+nav.abas a:hover{border-color:var(--ciano);color:var(--ciano)}
+nav.abas a.on{background:var(--ciano);color:#07222a;border-color:var(--ciano);font-weight:700}
+.painel{background:var(--card);border:1px solid var(--borda);border-left:4px solid var(--ciano);padding:14px;margin:20px 0;font-size:.9rem;border-radius:8px}
+.painel b{color:var(--ciano)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button{font-family:inherit;cursor:pointer;border:1px solid var(--borda);background:#19202b;color:var(--texto);padding:8px 14px;font-size:.85rem;border-radius:7px}
+button:hover{border-color:var(--ciano);color:var(--ciano)}
+button.pri{background:var(--ciano);color:#07222a;font-weight:700;border-color:var(--ciano)}
+h2.sec{color:#fff;font-size:1.35rem;margin:32px 0 10px;border-bottom:1px solid var(--borda);padding-bottom:8px}
+h2.sec.mat{color:var(--mat2)} h2.sec.vida{color:var(--vida2)}
+.card{border:1px solid var(--borda);background:var(--card);padding:16px;margin:14px 0;border-radius:10px}
+.card.quim{border-left:4px solid var(--mat)} .card.bio{border-left:4px solid var(--vida)}
+.card h3{font-size:1.1rem;margin-bottom:8px;color:#fff}
+.card p{margin-bottom:8px}
+.card sub{font-size:.75em}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92rem}
+th,td{border:1px solid var(--borda);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#161c25;color:var(--ciano);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+td sub{font-size:.75em}
+.eq{font-family:'Consolas','Courier New',monospace;background:#0a0d12;border:1px solid var(--borda);border-radius:8px;padding:8px 10px;margin:6px 0;font-size:1rem;color:var(--mat2);text-align:center}
+.eq sub{color:var(--mat2)}
+.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px}
+.flip{perspective:1000px;height:180px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.v .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--borda);padding:14px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-radius:10px}
+.flip .f{background:var(--card2)}
+.flip .f .d{font-size:1.2rem;color:var(--ciano);font-weight:700}
+.flip .f .l{font-size:.72rem;color:var(--texto2);letter-spacing:.12em;text-transform:uppercase;margin-top:8px}
+.flip .b{background:#141b25;transform:rotateY(180deg);font-size:.9rem;line-height:1.5;overflow:auto}
+.flip .b b{color:var(--ciano)}
+.flip .b sub{font-size:.75em}
+.postits{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+.postit{background:#2a2410;border:1px solid var(--mat);border-radius:8px;padding:14px;font-size:.92rem;color:#f6e4bd}
+.postit b{color:var(--mat2)}
+.caixa{border:2px solid var(--alerta);background:#180e0c;padding:18px;margin:16px 0;border-radius:10px}
+.caixa h3{color:#f0998f;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.caixa ol{margin-left:20px}.caixa li{margin-bottom:9px}
+.caixa sub{font-size:.75em}
+.gloss div{border-bottom:1px dashed var(--borda);padding:8px 0;font-size:.95rem}
+.gloss b{color:var(--vida2)}
+.check{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--borda);background:var(--card);padding:10px 12px;margin-bottom:7px;border-radius:8px;cursor:pointer}
+.check.ok{border-color:var(--vida);background:#0e1f14}
+.check input{margin-top:3px}
+.contador{font-size:.9rem;color:var(--texto2);margin:8px 0}
+.contador b{color:var(--vida2)}
+.fim{text-align:center;padding:26px 0;color:var(--texto2);font-size:.85rem}
+.fim a{color:var(--ciano)}
+.jogar{display:block;width:100%;text-align:center;background:var(--ciano);color:#07222a;font-weight:700;border:none;border-radius:10px;padding:16px;font-size:1.05rem;margin:22px 0;cursor:pointer;text-decoration:none}
+@media(max-width:640px){.logo{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="logo">Reação em <span class="c">Cadeia</span></div>
+  <div class="sub">Resumo &bull; Química + Biologia</div>
+  <nav class="abas">
+    <a href="index.html">🏠 Início</a>
+    <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html">🎯 Quiz</a>
+    <a href="resumo.html" class="on">🗺️ Resumo</a>
+    <a href="simulado.html">📝 Simulado</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <div class="painel">
+    <b>🗺️ Como usar o resumo.</b> Aqui está tudo em quadros, cartas para virar e dicas. Use depois do Quiz, para fechar exatamente o que ficou com dúvida. As cartas viradas e os tópicos que você marcar como &ldquo;dominei&rdquo; ficam salvos sozinhos.
+    <div style="margin-top:8px;color:var(--texto2)">Salvamento automático: <b id="quando">—</b></div>
+    <div class="btns">
+      <button onclick="exportar()">📥 Exportar</button>
+      <button onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+
+  <!-- ===================== QUÍMICA ===================== -->
+  <h2 class="sec mat">🧪 Ala da Matéria — Química (cap. 10)</h2>
+
+  <div class="card quim">
+    <h3>Quadro 1 — As 3 leis das reações químicas</h3>
+    <table>
+      <tr><th>Lei</th><th>O que ela diz</th><th>Exemplo</th></tr>
+      <tr><td><b>Lavoisier</b><br>(conservação das massas)</td><td>Em <b>sistema fechado</b>, a soma das massas dos reagentes é <b>igual</b> à soma das massas dos produtos. &ldquo;Nada se cria, nada se perde, tudo se transforma.&rdquo;</td><td>40 g de cálcio + 16 g de oxigênio &rarr; <b>56 g</b> de cal</td></tr>
+      <tr><td><b>Proust</b><br>(proporções constantes)</td><td>Uma substância pura sempre tem a <b>mesma proporção</b> em massa entre os elementos, qualquer que seja a origem.</td><td>Água: <b>1 g de hidrogênio : 8 g de oxigênio</b> (2 g H + 16 g O &rarr; 18 g de água)</td></tr>
+      <tr><td><b>Gay-Lussac</b><br>(proporções volumétricas)</td><td>Entre <b>gases</b>, nas mesmas condições de temperatura e pressão, os <b>volumes</b> guardam uma relação de números <b>inteiros e pequenos</b>.</td><td>2 L de H<sub>2</sub> + 1 L de O<sub>2</sub> &rarr; 2 L de vapor de água (<b>2 : 1 : 2</b>)</td></tr>
+    </table>
+    <p style="font-size:.88rem;color:var(--texto2)">Lavoisier e Proust são <b>leis ponderais</b> (de massa). Gay-Lussac é <b>lei volumétrica</b> (de volume de gases).</p>
+  </div>
+
+  <div class="card quim">
+    <h3>Quadro 2 — Reagente limitante x em excesso</h3>
+    <p>Quando os reagentes não estão na proporção exata, um deles <b>acaba primeiro</b> (o <b>limitante</b>) e decide quanto de produto se forma; o outro <b>sobra</b> (está <b>em excesso</b>).</p>
+    <table>
+      <tr><th>Situação</th><th>Conta (água, 1 : 8)</th><th>Resultado</th></tr>
+      <tr><td>2 g H + 24 g O</td><td>2 g H só reagem com 16 g O</td><td>O é limitante? Não: <b>H é limitante</b>, sobram <b>8 g de oxigênio</b></td></tr>
+      <tr><td>10 g H + 40 g O</td><td>40 g O precisam de 5 g H</td><td><b>O é limitante</b>, sobram <b>5 g de hidrogênio</b></td></tr>
+    </table>
+  </div>
+
+  <div class="card quim">
+    <h3>Quadro 3 — Como balancear uma equação (passo a passo)</h3>
+    <p><b>Balancear</b> = deixar o <b>mesmo número de átomos de cada elemento</b> dos dois lados da seta (é a Lei de Lavoisier aplicada à equação).</p>
+    <p>1) Mexa só nos <b>coeficientes</b> (números grandes na frente). <b>Nunca</b> mude os <b>índices</b> das fórmulas. <br>
+    2) Comece pelo elemento que aparece <b>uma vez em cada lado</b> e com <b>mais átomos</b>. <br>
+    3) Deixe o <b>hidrogênio e o oxigênio por último</b>. <br>
+    4) No fim, <b>confira</b> contando os átomos.</p>
+    <p style="margin-top:8px"><b>Exemplos já balanceados (confira contando):</b></p>
+    <div class="eq">2 H<sub>2</sub> + O<sub>2</sub> &rarr; 2 H<sub>2</sub>O</div>
+    <div class="eq">N<sub>2</sub> + 3 H<sub>2</sub> &rarr; 2 NH<sub>3</sub></div>
+    <div class="eq">N<sub>2</sub> + 2 O<sub>2</sub> &rarr; 2 NO<sub>2</sub></div>
+    <div class="eq">2 HgO &rarr; 2 Hg + O<sub>2</sub></div>
+    <div class="eq">H<sub>2</sub> + Cl<sub>2</sub> &rarr; 2 HCl</div>
+  </div>
+
+  <h2 class="sec mat">🃏 Cartas da Matéria — clique para virar</h2>
+  <div class="flips" id="flipsQ"></div>
+
+  <!-- ===================== BIOLOGIA ===================== -->
+  <h2 class="sec vida">🧬 Ala da Vida — Biologia (cap. 6)</h2>
+
+  <div class="card bio">
+    <h3>Quadro 4 — As 4 cores da biotecnologia</h3>
+    <p><b>Biotecnologia (ONU):</b> toda tecnologia que usa <b>seres vivos</b> (ou seus derivados) para <b>fabricar ou modificar</b> produtos ou processos.</p>
+    <table>
+      <tr><th>Cor</th><th>Área</th><th>Exemplo</th></tr>
+      <tr><td><b style="color:var(--alerta)">VERMELHA</b></td><td>Saúde</td><td>Fármacos, vacinas, diagnósticos</td></tr>
+      <tr><td><b style="color:var(--vida2)">VERDE</b></td><td>Agricultura</td><td>Sementes e plantas geneticamente modificadas</td></tr>
+      <tr><td><b style="color:var(--ciano)">AZUL</b></td><td>Recursos biológicos do mar</td><td>Sangue do <b>caranguejo-ferradura</b> para detectar contaminação</td></tr>
+      <tr><td><b style="color:#dfe8f2">BRANCA</b></td><td>Processos industriais</td><td>Produção com microrganismos na indústria</td></tr>
+    </table>
+    <p style="font-size:.88rem;color:var(--texto2)">Marcos: prática milenar (pão, queijo, bebidas) &bull; Pasteur (fim do séc. XIX) &bull; termo criado por <b>Karl Ereky (1917)</b> &bull; <b>Projeto Genoma Humano (1990&ndash;2003)</b>.</p>
+  </div>
+
+  <div class="card bio">
+    <h3>Quadro 5 — Transgênicos e DNA recombinante</h3>
+    <p><b>Transgênico:</b> organismo que recebeu um <b>gene de outra espécie</b> e passa a ter aquela característica. A <b>técnica do DNA recombinante</b> só funciona porque o <b>DNA de todos os seres vivos tem a mesma composição química</b>. O gene é inserido no <b>embrião</b> para que todas as células (e os descendentes) sejam transgênicas.</p>
+    <table>
+      <tr><th>Exemplo</th><th>O que faz</th></tr>
+      <tr><td>Bactéria <i>E. coli</i> transgênica</td><td>Produz <b>insulina humana</b> em larga escala</td></tr>
+      <tr><td>Arroz-dourado</td><td>Produz <b>betacaroteno</b> (precursor da vitamina A)</td></tr>
+      <tr><td>Peixe GloFish</td><td>Recebeu o gene GFP de água-viva &rarr; <b>fluorescente</b> sob luz UV</td></tr>
+    </table>
+    <p style="font-size:.88rem;color:var(--texto2)">No Brasil: regulado pela <b>CTNBio</b> e pela <b>Lei de Biossegurança (11.105/2005)</b>; símbolo <b>&ldquo;T&rdquo;</b> (triângulo amarelo) em produtos com mais de 1% de transgênicos. <b>Riscos ambientais:</b> perda de biodiversidade, poluição gênica, monopólio de sementes, pragas super-resistentes, morte de polinizadores. <b>Saúde:</b> estudos atuais indicam que consumir transgênicos não faz mal.</p>
+  </div>
+
+  <div class="card bio">
+    <h3>Quadro 6 — Tipos de célula-tronco</h3>
+    <p><b>Célula-tronco:</b> indiferenciada, com alto poder de replicação; pode virar vários tipos de célula. <b>Plasticidade</b> = capacidade de diferenciação (quanto maior, mais tecidos forma).</p>
+    <table>
+      <tr><th>Tipo</th><th>Origem / fase</th><th>O que forma</th></tr>
+      <tr><td><b>Totipotente</b></td><td>Embrião — mórula (até 32 células)</td><td>Qualquer tecido <b>+ os anexos</b> (placenta, cordão)</td></tr>
+      <tr><td><b>Pluripotente</b></td><td>Embrião — blástula (até 64 células)</td><td>Qualquer tecido, <b>mas NÃO os anexos</b></td></tr>
+      <tr><td><b>Multipotente</b> (oligopotente)</td><td>Tecidos adultos (medula óssea, cordão, tecido adiposo)</td><td>Só <b>alguns</b> tipos de célula</td></tr>
+      <tr><td><b>Unipotente</b></td><td>Origem adulta</td><td>Apenas <b>um</b> tipo de célula/tecido</td></tr>
+      <tr><td><b>iPS</b> (induzidas)</td><td>Células adultas reprogramadas</td><td>Voltam ao estágio <b>pluripotente</b></td></tr>
+    </table>
+    <p style="font-size:.88rem;color:var(--texto2)">As <b>embrionárias</b> são as mais promissoras (doenças degenerativas), mas geram <b>dilema ético</b>: extraí-las inviabiliza o embrião. Aplicações: medula óssea (imunidade, câncer), Alzheimer, Parkinson, diabetes, tecido cardíaco, renal e hepático.</p>
+  </div>
+
+  <div class="card bio">
+    <h3>Quadro 7 — Tipos de clonagem</h3>
+    <p><b>Clonagem:</b> reprodução <b>assexuada</b> que produz organismos <b>geneticamente idênticos</b> ao original.</p>
+    <table>
+      <tr><th>Classificação</th><th>Como é</th><th>Exemplos</th></tr>
+      <tr><td><b>Natural</b></td><td>Acontece sozinha na natureza</td><td>Bipartição, brotamento, regeneração, <b>gêmeos univitelinos</b></td></tr>
+      <tr><td><b>Artificial</b></td><td>Feita em laboratório pelo <b>transplante de núcleo</b></td><td><b>Ovelha Dolly</b> (1996, Instituto Roslin, Escócia)</td></tr>
+      <tr><td><b>Reprodutiva</b></td><td>Gera novos organismos</td><td>Clonar plantas e animais</td></tr>
+      <tr><td><b>Terapêutica</b></td><td>Produz células-tronco/tecidos em laboratório, <b>sem implantar o embrião</b></td><td>Tratamento de doenças</td></tr>
+    </table>
+    <p style="font-size:.88rem;color:var(--texto2)"><b>Dolly:</b> 1º mamífero clonado; envolveu <b>3 ovelhas</b> e ~<b>277 embriões</b> (só ela vingou); teve <b>envelhecimento precoce</b>. <b>Desvantagens:</b> baixa taxa de sucesso, anomalias, envelhecimento precoce, lesões/tumores. <b>Bioética:</b> discute os limites éticos.</p>
+  </div>
+
+  <h2 class="sec vida">🃏 Cartas da Vida — clique para virar</h2>
+  <div class="flips" id="flipsB"></div>
+
+  <!-- ===================== DICAS / PEGADINHAS / GLOSSÁRIO ===================== -->
+  <h2 class="sec">💡 Dicas de prova (post-its)</h2>
+  <div class="postits">
+    <div class="postit"><b>Dica 1.</b> Viu &ldquo;sistema aberto&rdquo; numa questão de Lavoisier? Desconfie: a massa pode parecer mudar porque gás entra ou sai.</div>
+    <div class="postit"><b>Dica 2.</b> Proust = proporção fixa. Para achar sobra, veja quanto cada reagente precisa do outro: quem pede menos é que sobra.</div>
+    <div class="postit"><b>Dica 3.</b> Gay-Lussac só vale para GASES nas MESMAS condições. A resposta sempre dá números inteiros e pequenos.</div>
+    <div class="postit"><b>Dica 4.</b> Balanceou? Conte os átomos dos dois lados antes de marcar. Nunca mude os indicezinhos das fórmulas.</div>
+    <div class="postit"><b>Dica 5.</b> As 4 cores: VERMELHA-saúde, VERDE-agricultura, AZUL-mar, BRANCA-indústria. Caranguejo-ferradura = azul.</div>
+    <div class="postit"><b>Dica 6.</b> Totipotente forma os anexos (placenta/cordão); pluripotente não. Dolly = artificial; gêmeos = natural.</div>
+  </div>
+
+  <h2 class="sec">🚨 As 10 pegadinhas</h2>
+  <div class="caixa">
+    <h3>Onde se perde ponto</h3>
+    <ol>
+      <li>Lavoisier só vale em <b>sistema fechado</b>.</li>
+      <li>Lavoisier = massa <b>total</b>; Proust = <b>proporção</b> fixa. Não confunda.</li>
+      <li>Reagente <b>limitante</b> acaba primeiro e decide o produto; o <b>excesso</b> sobra.</li>
+      <li>Gay-Lussac é <b>volume de gases</b> (mesmas condições), não massa.</li>
+      <li>Balancear = mexer só nos <b>coeficientes</b>, nunca nos <b>índices</b>.</li>
+      <li>Biotecnologia não é só moderna: pão e queijo (microrganismos) já são biotecnologia.</li>
+      <li>Caranguejo-ferradura = cor <b>azul</b> (recurso do mar), não vermelha.</li>
+      <li>Transgênico recebe gene de <b>outra espécie</b>; o DNAr funciona porque o DNA de todos tem a mesma composição química.</li>
+      <li>Totipotente (mórula) forma anexos; pluripotente (blástula) <b>não</b>.</li>
+      <li>Dolly = clonagem <b>artificial</b>; gêmeos = <b>natural</b>; terapêutica <b>não</b> implanta o embrião.</li>
+    </ol>
+  </div>
+
+  <h2 class="sec">📒 Glossário</h2>
+  <div class="card gloss">
+    <div><b>Reagentes e produtos:</b> o que entra e o que sai de uma reação química.</div>
+    <div><b>Sistema fechado:</b> recipiente em que nada de matéria entra nem sai.</div>
+    <div><b>Leis ponderais:</b> leis que tratam de massa (Lavoisier, Proust).</div>
+    <div><b>Lei volumétrica:</b> lei que trata de volume de gases (Gay-Lussac).</div>
+    <div><b>Reagente limitante:</b> o que acaba primeiro e determina quanto de produto se forma.</div>
+    <div><b>Coeficiente:</b> número grande na frente da fórmula (pode mudar ao balancear).</div>
+    <div><b>Índice:</b> numerozinho pequeno dentro da fórmula (não muda ao balancear).</div>
+    <div><b>Biotecnologia:</b> uso de seres vivos para fabricar/modificar produtos ou processos.</div>
+    <div><b>Transgênico:</b> organismo que recebeu um gene de outra espécie.</div>
+    <div><b>DNA recombinante (DNAr):</b> técnica de inserir um gene de uma espécie no genoma de outra.</div>
+    <div><b>Célula-tronco:</b> célula indiferenciada que pode virar vários tipos de célula.</div>
+    <div><b>Plasticidade:</b> capacidade de diferenciação de uma célula-tronco.</div>
+    <div><b>Clonagem:</b> reprodução assexuada que gera cópias geneticamente idênticas.</div>
+    <div><b>Bioética:</b> estudo dos limites éticos da ciência (transgênicos, clonagem, embriões, células-tronco).</div>
+  </div>
+
+  <h2 class="sec">✅ Checklist — marque o que você já domina</h2>
+  <div class="contador">Dominados: <b id="cont">0</b> de 24</div>
+  <div id="checklist"></div>
+
+  <a class="jogar" href="simulado.html">📝 Pronto? Agora encare o Simulado!</a>
+  <div class="fim">Reação em Cadeia &bull; Ciências &bull; 9º ano</div>
+</div>
+
+<div class="modal" id="mdl" style="position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px;z-index:99"><div style="background:#121821;border:1px solid var(--ciano);padding:22px;max-width:420px;border-radius:10px">
+  <h4 id="mdlt" style="color:var(--ciano);margin-bottom:10px">Confirmar</h4><p id="mdlp" style="font-size:.9rem;margin-bottom:14px">?</p>
+  <div class="btns"><button class="pri" onclick="mdlOk()">Sim, zerar</button><button onclick="fecharModal()">Cancelar</button></div>
+</div></div>
+
+<script>
+var MEM={};
+function LS(){try{var t='__t';localStorage.setItem(t,'1');localStorage.removeItem(t);return localStorage;}catch(e){return null;}}
+var ST=LS();
+function getIt(k){try{return ST?ST.getItem(k):(MEM[k]||null);}catch(e){return MEM[k]||null;}}
+function setIt(k,v){try{if(ST){ST.setItem(k,v);}else{MEM[k]=v;}}catch(e){MEM[k]=v;}}
+function delIt(k){try{if(ST){ST.removeItem(k);}else{delete MEM[k];}}catch(e){delete MEM[k];}}
+var CHAVE='cie9_reacaoemcadeia_resumo';
+
+var FLIPSQ=[
+ {d:"Lavoisier",l:"Conservação",b:"Em <b>sistema fechado</b>, massa dos reagentes = massa dos produtos."},
+ {d:"Proust",l:"Proporção",b:"Elementos se combinam sempre na <b>mesma proporção</b> em massa. Água: 1 g H : 8 g O."},
+ {d:"Gay-Lussac",l:"Volumes",b:"Volumes de <b>gases</b> (mesmas condições) em relação de <b>inteiros pequenos</b>: 2 : 1 : 2."},
+ {d:"Limitante",l:"Reagente",b:"O que <b>acaba primeiro</b> e decide quanto de produto. O outro fica <b>em excesso</b>."},
+ {d:"Coef. x Índice",l:"Balanceamento",b:"Muda o <b>coeficiente</b> (na frente), nunca o <b>índice</b> (dentro da fórmula)."},
+ {d:"40 + 16 = 56",l:"Lavoisier na conta",b:"Cálcio (40 g) + oxigênio (16 g) &rarr; <b>56 g</b> de cal."}
+];
+var FLIPSB=[
+ {d:"Karl Ereky",l:"1917",b:"Criou o <b>termo</b> biotecnologia (a prática é milenar: pão, queijo)."},
+ {d:"Projeto Genoma",l:"1990-2003",b:"Sequenciou o <b>DNA humano</b>; impulsionou transgênicos, clonagem e células-tronco."},
+ {d:"4 cores",l:"Biotecnologia",b:"<b>Vermelha</b>-saúde, <b>verde</b>-agricultura, <b>azul</b>-mar, <b>branca</b>-indústria."},
+ {d:"DNA recombinante",l:"Transgênicos",b:"Funciona porque o DNA de <b>todos os seres vivos</b> tem a mesma composição química."},
+ {d:"Totipotente",l:"Célula-tronco",b:"Mórula (até 32 células): forma tudo <b>+ anexos</b> (placenta, cordão)."},
+ {d:"Pluripotente",l:"Célula-tronco",b:"Blástula (até 64 células): forma tecidos, <b>mas NÃO os anexos</b>."},
+ {d:"Dolly",l:"1996, Escócia",b:"1º mamífero clonado; clonagem <b>artificial</b> por transplante de núcleo; ~277 embriões."},
+ {d:"Terapêutica",l:"Clonagem",b:"Produz células-tronco/tecidos em laboratório, <b>sem implantar</b> o embrião."}
+];
+var TOPICOS=[
+ "Sei o que são reagentes e produtos e que os átomos se reorganizam",
+ "Sei enunciar a Lei de Lavoisier (conservação das massas)",
+ "Entendo por que Lavoisier só vale em sistema fechado",
+ "Sei resolver uma conta de Lavoisier (somar as massas)",
+ "Sei enunciar a Lei de Proust (proporções constantes)",
+ "Sei usar a proporção 1:8 da água numa conta",
+ "Sei achar o reagente limitante e o que sobra (excesso)",
+ "Sei a diferença entre Lavoisier e Proust",
+ "Sei enunciar a Lei de Gay-Lussac (volumes de gases)",
+ "Sei usar a proporção 2:1:2 do vapor de água",
+ "Sei a diferença entre leis ponderais e lei volumétrica",
+ "Sei balancear uma equação ajustando os coeficientes",
+ "Sei que não se pode mudar os índices das fórmulas",
+ "Sei a definição de biotecnologia (ONU)",
+ "Conheço os marcos (Pasteur, Karl Ereky 1917, Projeto Genoma)",
+ "Sei as 4 cores da biotecnologia e um exemplo de cada",
+ "Sei o que é um transgênico e a técnica do DNA recombinante",
+ "Sei por que o DNAr funciona (mesma composição do DNA)",
+ "Conheço exemplos: insulina, arroz-dourado, GloFish",
+ "Sei os riscos e a regulação (CTNBio, Lei 11.105, símbolo T)",
+ "Sei o que é célula-tronco e plasticidade",
+ "Sei diferenciar totipotente, pluripotente, multi, uni e iPS",
+ "Sei o que é clonagem e a diferença natural x artificial",
+ "Sei a diferença entre clonagem reprodutiva e terapêutica"
+];
+
+var D={flip:{},chk:{},rol:0};
+function salvar(){D.quando=new Date().toLocaleString('pt-BR');setIt(CHAVE,JSON.stringify(D));var q=document.getElementById('quando');if(q)q.textContent=D.quando;}
+function carregar(){var r=getIt(CHAVE);if(r){try{var o=JSON.parse(r);if(o&&typeof o==='object'){D=o;if(!D.flip)D.flip={};if(!D.chk)D.chk={};if(!D.rol)D.rol=0;}}catch(e){}}var q=document.getElementById('quando');if(q)q.textContent=D.quando||'ainda não salvo';}
+
+function renderFlips(lista,alvo,base){
+  var f=document.getElementById(alvo); f.innerHTML='';
+  for(var i=0;i<lista.length;i++){
+    var key=base+i, C=lista[i], d=document.createElement('div');
+    d.className='flip'+(D.flip[key]?' v':''); d.setAttribute('data-k',key);
+    d.innerHTML='<div class="in"><div class="f"><div class="d">'+C.d+'</div><div class="l">'+C.l+'</div></div><div class="b">'+C.b+'</div></div>';
+    d.onclick=(function(k){return function(){virar(k);};})(key);
+    f.appendChild(d);
+  }
+}
+function virar(k){ D.flip[k]=!D.flip[k]; salvar();
+  var el=document.querySelector('.flip[data-k="'+k+'"]'); if(el) el.className='flip'+(D.flip[k]?' v':''); }
+function renderCheck(){
+  var cl=document.getElementById('checklist'); cl.innerHTML='';
+  for(var t=0;t<TOPICOS.length;t++){
+    var mk=!!D.chk[t], dv=document.createElement('label');
+    dv.className='check'+(mk?' ok':'');
+    dv.innerHTML='<input type="checkbox" id="ck'+t+'" '+(mk?'checked':'')+'><span>'+TOPICOS[t]+'</span>';
+    dv.setAttribute('data-t',t);
+    dv.onclick=(function(tt){return function(ev){ if(ev.target.tagName!=='INPUT'){ var inp=document.getElementById('ck'+tt); inp.checked=!inp.checked; } marcar(tt); };})(t);
+    cl.appendChild(dv);
+  }
+  attCont();
+}
+function marcar(t){ D.chk[t]=document.getElementById('ck'+t).checked; salvar();
+  var lab=document.querySelector('.check[data-t="'+t+'"]'); if(lab) lab.className='check'+(D.chk[t]?' ok':''); attCont(); }
+function attCont(){var n=0;for(var k in D.chk){if(D.chk.hasOwnProperty(k)&&D.chk[k])n++;}document.getElementById('cont').textContent=n;}
+
+window.addEventListener('scroll',function(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  if(h<=0) return;
+  var p=Math.round(window.scrollY/h*100);
+  if(p>(D.rol||0)){ D.rol=Math.min(p,100); salvar(); }
+});
+
+function exportar(){
+  var marc=[],n=0;
+  for(var t=0;t<TOPICOS.length;t++){ if(D.chk[t]){ marc.push(TOPICOS[t]); n++; } }
+  var out={material:'Resumo',kit:'Reação em Cadeia — Ciências 9º ano',quando:D.quando||'',
+    rolagem_maxima_pct:D.rol||0,cartas_viradas:Object.keys(D.flip).length,
+    topicos_dominados:n,total_topicos:TOPICOS.length,lista_marcados:marc};
+  var bl=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(bl); a.download='resumo-ciencias9.json'; a.click();
+}
+function importar(ev){
+  var f=ev.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(x){try{var o=JSON.parse(x.target.result);
+    if(o){ if(o.rolagem_maxima_pct)D.rol=o.rolagem_maxima_pct;
+      if(o.lista_marcados){ D.chk={}; for(var t=0;t<TOPICOS.length;t++){ if(o.lista_marcados.indexOf(TOPICOS[t])!==-1) D.chk[t]=true; } }
+      salvar(); renderCheck(); } }catch(e){}};
+  r.readAsText(f); ev.target.value='';
+}
+var acaoModal=null;
+function pedirZerar(){
+  acaoModal=function(){ delIt(CHAVE); D={flip:{},chk:{},rol:0}; salvar(); renderFlips(FLIPSQ,'flipsQ','q'); renderFlips(FLIPSB,'flipsB','b'); renderCheck(); fecharModal(); };
+  document.getElementById('mdlt').textContent='Zerar tudo?';
+  document.getElementById('mdlp').textContent='Isso desmarca o checklist e as cartas deste Resumo.';
+  document.getElementById('mdl').style.display='flex';
+}
+function mdlOk(){ if(acaoModal) acaoModal(); }
+function fecharModal(){ document.getElementById('mdl').style.display='none'; acaoModal=null; }
+
+carregar(); renderFlips(FLIPSQ,'flipsQ','q'); renderFlips(FLIPSB,'flipsB','b'); renderCheck();
+</script>
+</body>
+</html>
