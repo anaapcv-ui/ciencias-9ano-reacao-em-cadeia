@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reação em Cadeia — Kit de Ciências | 9º ano</title>
+<style>
+:root{--fundo:#0c0f14;--card:#10141b;--card2:#151b24;--texto:#d7dde6;--texto2:#8b95a4;--borda:#232a35;--mat:#f5a742;--mat2:#ffcf7a;--vida:#3ddc84;--vida2:#7af0ae;--ciano:#35d0e0;--alerta:#e0564b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--fundo);color:var(--texto);font-family:'Segoe UI',system-ui,Arial,sans-serif;line-height:1.7;padding-bottom:60px}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+header.top{background:linear-gradient(180deg,#121823,#0c0f14);border-bottom:2px solid var(--ciano);padding:34px 0 22px}
+.logo{font-size:3rem;letter-spacing:.03em;color:#fff;text-align:center;font-weight:800;line-height:1.05}
+.logo .c{color:var(--ciano)}
+.sub{text-align:center;color:var(--texto2);font-size:.84rem;letter-spacing:.2em;text-transform:uppercase;margin-top:10px}
+.faixa{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:.76rem;color:var(--texto2);letter-spacing:.08em;text-transform:uppercase}
+.lead{border:1px solid var(--borda);border-left:4px solid var(--ciano);background:var(--card);padding:18px;margin:26px 0;font-size:1.02rem;border-radius:8px}
+.lead b{color:var(--ciano)}
+h2.sec{color:#fff;font-size:1.35rem;margin:34px 0 6px;border-bottom:2px solid var(--borda);padding-bottom:8px}
+h2.sec small{display:block;font-size:.72rem;color:var(--texto2);letter-spacing:.18em;text-transform:uppercase;font-weight:400;margin-top:4px}
+.cards{display:grid;gap:14px;margin-top:18px}
+a.card{display:block;border:1px solid var(--borda);background:var(--card);padding:18px;text-decoration:none;color:var(--texto);position:relative;border-radius:10px;transition:border-color .2s}
+a.card:hover{border-color:var(--ciano)}
+a.card .ordem{position:absolute;top:14px;right:16px;font-family:'Consolas','Courier New',monospace;font-size:2rem;color:#1c232e}
+a.card h3{color:var(--ciano);font-size:1.25rem;margin-bottom:6px}
+a.card p{font-size:.95rem}
+a.card .meta{font-size:.74rem;letter-spacing:.08em;color:var(--texto2);text-transform:uppercase;margin-top:8px}
+ol.como{margin:16px 0 0 22px}
+ol.como li{margin-bottom:10px}
+ol.como b{color:var(--ciano)}
+.aviso{border:1px solid var(--borda);background:var(--card);padding:16px;margin-top:18px;font-size:.88rem;color:var(--texto2);border-radius:8px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.92rem}
+th,td{border:1px solid var(--borda);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#161c25;color:var(--ciano);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+td sub{font-size:.75em}
+.rel{border:2px solid var(--ciano);background:#0e1a1f;padding:20px;margin-top:18px;border-radius:10px}
+.rel h3{color:var(--ciano);font-size:1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.rel p{font-size:.92rem;margin-bottom:12px}
+.rel input{background:#0a0d12;border:1px solid var(--borda);color:var(--texto);padding:10px;font-family:'Consolas','Courier New',monospace;font-size:1rem;width:190px;text-transform:uppercase;border-radius:7px}
+.rel button{cursor:pointer;border:1px solid var(--ciano);background:var(--ciano);color:#07222a;padding:10px 16px;font-weight:700;font-size:.88rem;border-radius:7px;font-family:inherit}
+.rel .msg{margin-top:10px;font-size:.86rem;display:none;color:#f0998f}
+.rel .msg.on{display:block}
+#relbox{display:none;margin-top:18px}
+#relbox.on{display:block}
+.relcard{border:1px solid var(--borda);background:var(--card);padding:14px;margin-bottom:12px;border-radius:8px}
+.relcard h4{color:var(--ciano);font-size:1.05rem;margin-bottom:6px}
+.relcard .linha{display:flex;justify-content:space-between;border-bottom:1px dashed var(--borda);padding:6px 0;font-size:.93rem;gap:12px}
+.relcard .linha b{color:var(--texto)}
+.relcard .vaz{color:var(--texto2);font-size:.9rem;font-style:italic}
+.relcard ul{margin:8px 0 0 20px;font-size:.9rem;color:#f0998f}
+.relcard li{margin-bottom:5px}
+.pill{display:inline-block;font-size:.68rem;letter-spacing:.08em;padding:2px 8px;text-transform:uppercase;border:1px solid;border-radius:20px}
+.pill.ok{border-color:var(--vida);color:var(--vida2)}
+.pill.nao{border-color:var(--borda);color:var(--texto2)}
+.fim{text-align:center;padding:30px 0 10px;color:var(--texto2);font-size:.85rem;border-top:1px solid var(--borda);margin-top:34px}
+@media(max-width:640px){.logo{font-size:2rem}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="logo">Reação em <span class="c">Cadeia</span></div>
+  <div class="sub">Instituto de Pesquisa &bull; Ala da Matéria + Ala da Vida</div>
+  <div class="faixa"><span>Ciências</span><span>&bull;</span><span>9º ano</span><span>&bull;</span><span>Química cap. 10 + Biologia cap. 6</span><span>&bull;</span><span>Prova 15/10</span></div>
+</div></header>
+
+<div class="wrap">
+  <div class="lead">
+    <b>Olá, jovem aprendiz.</b> Bem-vindo ao instituto <b>Reação em Cadeia</b>. Ele tem duas alas ligadas pela mesma cadeia: a <b>Ala da Matéria</b> (Química — as leis que transformam os átomos) e a <b>Ala da Vida</b> (Biologia — a biotecnologia que transforma os seres vivos). São quatro materiais, feitos para serem usados <b>nesta ordem</b>. Tudo o que você fizer fica salvo sozinho: dá para fechar e voltar depois.
+  </div>
+
+  <h2 class="sec">📚 Os materiais<small>Use nesta ordem</small></h2>
+  <div class="cards">
+    <a class="card" href="leitura-guiada.html">
+      <span class="ordem">01</span>
+      <h3>📖 Leitura Guiada</h3>
+      <p>Oito elos da cadeia — 4 de Química (Lavoisier, Proust, Gay-Lussac e balanceamento) e 4 de Biologia (biotecnologia, transgênicos, células-tronco e clonagem). Você lê e responde a três perguntas <b>escrevendo com as suas palavras</b>. Cada elo só abre depois que você confere o anterior.</p>
+      <div class="meta">8 elos &bull; 24 perguntas &bull; pegadinhas e tabela de cobertura</div>
+    </a>
+    <a class="card" href="quiz.html">
+      <span class="ordem">02</span>
+      <h3>🎯 Quiz</h3>
+      <p>Quinze questões de múltipla escolha, misturando Química e Biologia, para testar na hora o que ficou da leitura. No fim sai um <b>código MED</b> para mostrar em casa, e o gabarito comentado explica cada alternativa.</p>
+      <div class="meta">15 questões &bull; código MED &bull; gabarito comentado</div>
+    </a>
+    <a class="card" href="resumo.html">
+      <span class="ordem">03</span>
+      <h3>🗺️ Resumo</h3>
+      <p>Os quadros do instituto: as 3 leis e como balancear, as cores da biotecnologia, os tipos de célula-tronco e de clonagem, mais cartas para virar, post-its com dicas, as 10 pegadinhas, glossário e um checklist de revisão.</p>
+      <div class="meta">7 quadros &bull; 14 cartas &bull; checklist de 24 tópicos</div>
+    </a>
+    <a class="card" href="simulado.html">
+      <span class="ordem">04</span>
+      <h3>📝 Simulado</h3>
+      <p>Vinte e cinco questões no <b>estilo vestibular</b>, como cai no 9º ano: múltipla escolha, números romanos e somatório, misturando as duas matérias. Sai um <b>código SIM</b> e o gabarito comentado.</p>
+      <div class="meta">25 questões &bull; código SIM &bull; gabarito comentado</div>
+    </a>
+  </div>
+
+  <h2 class="sec">🧭 Como usar este material</h2>
+  <ol class="como">
+    <li>Comece pela <b>📖 Leitura Guiada</b>. Não pule para o fim: escrever as respostas é o que faz o conteúdo grudar. Se a resposta sair igual ao texto, o material vai pedir para você reescrever com as suas palavras — isso é de propósito.</li>
+    <li>Vá para o <b>🎯 Quiz</b> logo depois, com o assunto fresco. Ele mostra onde estão os buracos.</li>
+    <li>Use o <b>🗺️ Resumo</b> para fechar exatamente os buracos que o Quiz apontou — e não para ler tudo de novo do começo.</li>
+    <li>Deixe o <b>📝 Simulado</b> para o final, valendo, sem consultar nada. É o ensaio da prova de verdade.</li>
+    <li>Em qualquer material, o botão <b>📥 Exportar</b> salva um arquivo com o seu desempenho, e o <b>🗑️ Zerar tudo</b> começa do zero.</li>
+  </ol>
+
+  <h2 class="sec">🗂️ O que cai na prova</h2>
+  <table>
+    <tr><th>Matéria</th><th>Capítulo</th><th>Assuntos principais</th></tr>
+    <tr><td><b>Química</b></td><td>Cap. 10<br>Lei das reações químicas</td><td>Reação química e reorganização dos átomos; Lei de Lavoisier (conservação das massas, sistema fechado); Lei de Proust (proporções constantes, reagente limitante e em excesso); Lei de Gay-Lussac (proporções volumétricas dos gases); balanceamento de equações pelo método das tentativas</td></tr>
+    <tr><td><b>Biologia</b></td><td>Cap. 6<br>Biotecnologia</td><td>Definição e histórico da biotecnologia; as 4 cores (vermelha, verde, azul, branca); transgênicos e técnica do DNA recombinante (insulina, arroz-dourado, GloFish); regulação (CTNBio, Lei 11.105, símbolo T) e riscos; células-tronco (toti, pluri, multi, uni e iPS); clonagem (natural e artificial, Dolly, reprodutiva e terapêutica); bioética</td></tr>
+  </table>
+
+  <h2 class="sec">📊 Relatório para os pais<small>Acesso com código</small></h2>
+  <div class="rel">
+    <h3>🔒 Área dos responsáveis</h3>
+    <p>Digite o <b>código da família</b> (<b>PAIS-77</b>) ou qualquer um dos códigos que o jovem aprendiz recebeu ao terminar o Quiz (MED-…) ou o Simulado (SIM-…).</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input id="codin" placeholder="PAIS-77" maxlength="12">
+      <button onclick="abrir()">Abrir relatório</button>
+    </div>
+    <div class="msg" id="msg">Código incorreto. Tente <b>PAIS-77</b>, ou o código MED/SIM que aparece ao fim do Quiz ou do Simulado.</div>
+    <div id="relbox"></div>
+  </div>
+
+  <div class="aviso">
+    <b>Como ler o relatório.</b> Ele mostra o que foi feito em cada material: acertos no Quiz e no Simulado, quantos elos da Leitura Guiada foram concluídos, quais respostas ficaram <b>muito parecidas com o texto do livro</b> (sinal de cópia, não de compreensão), quais pontos do checklist ficaram marcados como &ldquo;Não&rdquo; e até onde o Resumo foi lido. Nada disso é nota — é um mapa do que ainda vale revisar antes do dia 15.
+  </div>
+
+  <div class="fim">
+    Kit de estudos &bull; Ciências (Química + Biologia) &bull; 9º ano do Ensino Fundamental<br>
+    Conteúdo baseado no livro didático adotado pela escola &bull; material de uso pessoal
+  </div>
+</div>
+
+<script>
+var MEM={};
+function LS(){try{var t='__t';localStorage.setItem(t,'1');localStorage.removeItem(t);return localStorage;}catch(e){return null;}}
+var ST=LS();
+function getIt(k){try{return ST?ST.getItem(k):(MEM[k]||null);}catch(e){return MEM[k]||null;}}
+var K={lg:'cie9_reacaoemcadeia_leitura',qz:'cie9_reacaoemcadeia_quiz',rs:'cie9_reacaoemcadeia_resumo',sm:'cie9_reacaoemcadeia_simulado'};
+function ler(k){var r=getIt(k);if(!r)return null;try{return JSON.parse(r);}catch(e){return null;}}
+
+var BLOCOS=[
+ {id:1,m:"Lei de Lavoisier"},{id:2,m:"Lei de Proust"},
+ {id:3,m:"Lei de Gay-Lussac"},{id:4,m:"Balanceamento"},
+ {id:5,m:"Biotecnologia e cores"},{id:6,m:"Transgênicos e DNAr"},
+ {id:7,m:"Células-tronco"},{id:8,m:"Clonagem"}
+];
+
+function valido(v){
+  if(v==='PAIS-77') return true;
+  var q=ler(K.qz), s=ler(K.sm);
+  if(q&&q.codigo&&v===q.codigo) return true;
+  if(s&&s.codigo&&v===s.codigo) return true;
+  return false;
+}
+function abrir(){
+  var v=(document.getElementById('codin').value||'').trim().toUpperCase();
+  if(!valido(v)){ document.getElementById('msg').className='msg on'; return; }
+  document.getElementById('msg').className='msg';
+  montar();
+  document.getElementById('relbox').className='on';
+}
+function pill(txt,cls){ return '<span class="pill '+cls+'">'+txt+'</span>'; }
+function montar(){
+  var h='';
+  /* Leitura Guiada */
+  var lg=ler(K.lg);
+  h+='<div class="relcard"><h4>📖 Leitura Guiada</h4>';
+  if(!lg||!lg.blocos||!Object.keys(lg.blocos).length){
+    h+='<div class="vaz">Ainda não foi iniciada.</div>';
+  }else{
+    var feitos=0,verm=[],naos=[];
+    for(var i=0;i<BLOCOS.length;i++){
+      var b=lg.blocos['elo_'+BLOCOS[i].id];
+      if(!b) continue;
+      if(b.feito) feitos++;
+      if(b.perguntas){
+        for(var q=0;q<b.perguntas.length;q++){
+          if(b.perguntas[q].transcrita) verm.push('ELO '+BLOCOS[i].id+' ('+BLOCOS[i].m+'), pergunta '+(q+1));
+          if(b.perguntas[q].chk){
+            for(var key in b.perguntas[q].chk){
+              if(b.perguntas[q].chk.hasOwnProperty(key)&&b.perguntas[q].chk[key]===false){
+                naos.push('ELO '+BLOCOS[i].id+', pergunta '+(q+1)); break;
+              }
+            }
+          }
+        }
+      }
+    }
+    h+='<div class="linha"><span>Elos concluídos</span><b>'+feitos+' de 8</b></div>';
+    h+='<div class="linha"><span>Respostas copiadas do texto</span><b>'+verm.length+'</b></div>';
+    h+='<div class="linha"><span>Perguntas com ponto do checklist marcado como &ldquo;Não&rdquo;</span><b>'+naos.length+'</b></div>';
+    if(verm.length){ h+='<ul>'; for(var v1=0;v1<verm.length;v1++) h+='<li>📌 '+verm[v1]+'</li>'; h+='</ul>'; }
+    if(naos.length){
+      var vistos={},lista=[];
+      for(var n1=0;n1<naos.length;n1++){ if(!vistos[naos[n1]]){ vistos[naos[n1]]=1; lista.push(naos[n1]); } }
+      h+='<ul>'; for(var n2=0;n2<lista.length;n2++) h+='<li>🔁 '+lista[n2]+'</li>'; h+='</ul>';
+    }
+  }
+  h+='</div>';
+  /* Quiz */
+  var qz=ler(K.qz);
+  h+='<div class="relcard"><h4>🎯 Quiz</h4>';
+  if(!qz||!qz.enviado){ h+='<div class="vaz">Ainda não foi enviado.</div>'; }
+  else{
+    var ac=parseInt(String(qz.codigo||'MED-00-XX').split('-')[1],10); if(isNaN(ac)) ac=0;
+    h+='<div class="linha"><span>Código</span><b>'+(qz.codigo||'—')+'</b></div>';
+    h+='<div class="linha"><span>Acertos</span><b>'+ac+' de 15</b></div>';
+    h+='<div class="linha"><span>Aproveitamento</span><b>'+Math.round(ac/15*100)+'%</b></div>';
+    h+='<div class="linha"><span>Gabarito aberto</span>'+(qz.gab?pill('sim','ok'):pill('ainda não','nao'))+'</div>';
+  }
+  h+='</div>';
+  /* Resumo */
+  var rs=ler(K.rs);
+  h+='<div class="relcard"><h4>🗺️ Resumo</h4>';
+  if(!rs){ h+='<div class="vaz">Ainda não foi aberto.</div>'; }
+  else{
+    var nm=0; if(rs.chk){ for(var k2 in rs.chk){ if(rs.chk.hasOwnProperty(k2)&&rs.chk[k2]) nm++; } }
+    var nf=rs.flip?Object.keys(rs.flip).length:0;
+    h+='<div class="linha"><span>Tópicos marcados como dominados</span><b>'+nm+' de 24</b></div>';
+    h+='<div class="linha"><span>Cartas viradas</span><b>'+nf+' de 14</b></div>';
+    h+='<div class="linha"><span>Quanto da página foi percorrido</span><b>'+(rs.rol||0)+'%</b></div>';
+  }
+  h+='</div>';
+  /* Simulado */
+  var sm=ler(K.sm);
+  h+='<div class="relcard"><h4>📝 Simulado</h4>';
+  if(!sm||!sm.enviado){ h+='<div class="vaz">Ainda não foi enviado.</div>'; }
+  else{
+    var as=parseInt(String(sm.codigo||'SIM-00-XX').split('-')[1],10); if(isNaN(as)) as=0;
+    h+='<div class="linha"><span>Código</span><b>'+(sm.codigo||'—')+'</b></div>';
+    h+='<div class="linha"><span>Acertos</span><b>'+as+' de 25</b></div>';
+    h+='<div class="linha"><span>Aproveitamento</span><b>'+Math.round(as/25*100)+'%</b></div>';
+    h+='<div class="linha"><span>Gabarito aberto</span>'+(sm.gab?pill('sim','ok'):pill('ainda não','nao'))+'</div>';
+  }
+  h+='</div>';
+  document.getElementById('relbox').innerHTML=h;
+}
+</script>
+</body>
+</html>
