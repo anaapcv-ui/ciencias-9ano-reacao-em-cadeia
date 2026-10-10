@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — Reação em Cadeia | Ciências 9º ano</title>
+<style>
+:root{--fundo:#0c0f14;--card:#10141b;--card2:#151b24;--texto:#d7dde6;--texto2:#8b95a4;--borda:#232a35;--mat:#f5a742;--mat2:#ffcf7a;--vida:#3ddc84;--vida2:#7af0ae;--ciano:#35d0e0;--alerta:#e0564b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--fundo);color:var(--texto);font-family:'Segoe UI',system-ui,Arial,sans-serif;line-height:1.7;padding-bottom:60px}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+header.top{background:linear-gradient(180deg,#121823,#0c0f14);border-bottom:2px solid var(--ciano);padding:22px 0 16px}
+.logo{font-size:2.1rem;letter-spacing:.04em;color:#fff;text-align:center;font-weight:800}
+.logo .c{color:var(--ciano)}
+.sub{text-align:center;color:var(--texto2);font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;margin-top:6px}
+nav.abas{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:16px 0 0}
+nav.abas a{padding:8px 14px;border:1px solid var(--borda);background:#131922;color:var(--texto2);text-decoration:none;font-size:.86rem;border-radius:7px}
+nav.abas a:hover{border-color:var(--ciano);color:var(--ciano)}
+nav.abas a.on{background:var(--ciano);color:#07222a;border-color:var(--ciano);font-weight:700}
+.painel{background:var(--card);border:1px solid var(--borda);border-left:4px solid var(--ciano);padding:14px;margin:20px 0;font-size:.9rem;border-radius:8px}
+.painel b{color:var(--ciano)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button{font-family:inherit;cursor:pointer;border:1px solid var(--borda);background:#19202b;color:var(--texto);padding:8px 14px;font-size:.85rem;border-radius:7px}
+button:hover{border-color:var(--ciano);color:var(--ciano)}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.pri{background:var(--ciano);color:#07222a;font-weight:700;border-color:var(--ciano)}
+button.pri:disabled{background:#2b4248;color:#7d8c92;border-color:#2b4248}
+.prog{height:9px;background:#1a212b;border:1px solid var(--borda);margin:14px 0;border-radius:6px;overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--mat),var(--vida));width:0;transition:width .4s}
+.q{border:1px solid var(--borda);background:var(--card);margin:18px 0;padding:18px;border-radius:10px}
+.qhead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.qn{font-size:.74rem;letter-spacing:.16em;color:var(--ciano);text-transform:uppercase}
+.badge{font-size:.62rem;letter-spacing:.1em;padding:3px 9px;text-transform:uppercase;border:1px solid;border-radius:20px}
+.badge.quim{border-color:var(--mat);color:var(--mat2)}
+.badge.bio{border-color:var(--vida);color:var(--vida2)}
+.qt{margin:10px 0 14px;font-size:1.05rem}
+.qt sub{font-size:.75em}
+.alt{display:block;border:1px solid var(--borda);background:#0f131a;padding:10px 12px;margin-bottom:8px;cursor:pointer;font-size:.98rem;border-radius:8px}
+.alt sub{font-size:.75em}
+.alt:hover{border-color:var(--ciano)}
+.alt.sel{border-color:var(--ciano);background:#13232a}
+.alt input{margin-right:8px}
+.alt.cta{border-color:var(--vida);background:#0e1f14}
+.alt.err{border-color:var(--alerta);background:#1c0f0d}
+.alt.neu{opacity:.72}
+.exp{display:none;font-size:.86rem;margin-top:6px;padding-left:24px;color:var(--texto2)}
+.exp.on{display:block}
+.exp.v{color:#9fe9bd}
+.codigo{border:2px solid var(--ciano);background:#0e1a1f;padding:20px;text-align:center;margin:24px 0;display:none;border-radius:10px}
+.codigo.on{display:block}
+.codigo .big{font-family:'Consolas','Courier New',monospace;font-size:2.2rem;color:var(--ciano);letter-spacing:.14em;margin:10px 0}
+.codigo .nota{font-size:.86rem;color:var(--texto2)}
+.gate{border:1px solid var(--borda);background:var(--card);padding:18px;margin:20px 0;display:none;border-radius:10px}
+.gate.on{display:block}
+.gate input{background:#0a0d12;border:1px solid var(--borda);color:var(--texto);padding:9px;font-family:'Consolas','Courier New',monospace;font-size:1rem;letter-spacing:.1em;width:180px;text-transform:uppercase;border-radius:7px}
+.gate .msg{margin-top:8px;font-size:.86rem;display:none}
+.gate .msg.err{display:block;color:#f0998f}
+.fim{text-align:center;padding:26px 0;color:var(--texto2);font-size:.85rem}
+.fim a{color:var(--ciano)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px;z-index:99}
+.modal.on{display:flex}
+.modal .box{background:#121821;border:1px solid var(--ciano);padding:22px;max-width:420px;border-radius:10px}
+.modal h4{color:var(--ciano);margin-bottom:10px}.modal p{font-size:.9rem;margin-bottom:14px}
+@media(max-width:640px){.logo{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="logo">Reação em <span class="c">Cadeia</span></div>
+  <div class="sub">Quiz &bull; 15 questões &bull; Química + Biologia</div>
+  <nav class="abas">
+    <a href="index.html">🏠 Início</a>
+    <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html" class="on">🎯 Quiz</a>
+    <a href="resumo.html">🗺️ Resumo</a>
+    <a href="simulado.html">📝 Simulado</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <div class="painel">
+    <b>🎯 Como funciona.</b> São <b>15 questões de múltipla escolha</b>, misturando Química e Biologia. Responda <b>todas</b> antes de enviar — depois não dá para mudar. Você recebe um <b>código MED</b> para mostrar em casa, e o gabarito comentado abre com esse código.
+    <div style="margin-top:8px;color:var(--texto2)">Salvamento automático: <b id="quando">—</b></div>
+    <div class="btns">
+      <button onclick="exportar()">📥 Exportar</button>
+      <button onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+  <div class="prog"><i id="barra"></i></div>
+  <div id="qs"></div>
+  <button class="pri" id="env" onclick="enviar()" style="width:100%;padding:14px;font-size:1rem">📨 Enviar respostas</button>
+
+  <div class="codigo" id="cod">
+    <div class="nota">Código de liberação — mostre para um responsável</div>
+    <div class="big" id="codbig">MED-00-XX</div>
+    <div class="nota">Acertos: <b id="acertos">0</b> de 15</div>
+  </div>
+
+  <div class="gate" id="gate">
+    <b style="color:var(--ciano)">🔒 Gabarito comentado</b>
+    <p style="font-size:.88rem;margin:8px 0">Digite o código MED para abrir o gabarito.</p>
+    <input id="codin" placeholder="MED-00-XX" maxlength="9">
+    <button class="pri" onclick="abrirGab()">Abrir</button>
+    <div class="msg" id="gmsg">Código incorreto. Confira as letras e os números.</div>
+  </div>
+
+  <div class="fim">Depois do quiz, o próximo passo é o <a href="resumo.html">🗺️ Resumo</a>.</div>
+</div>
+
+<div class="modal" id="mdl"><div class="box">
+  <h4 id="mdlt">Confirmar</h4><p id="mdlp">?</p>
+  <div class="btns"><button class="pri" onclick="mdlOk()">Confirmar</button><button onclick="fecharModal()">Cancelar</button></div>
+</div></div>
+
+<script>
+var MEM={};
+function LS(){try{var t='__t';localStorage.setItem(t,'1');localStorage.removeItem(t);return localStorage;}catch(e){return null;}}
+var ST=LS();
+function getIt(k){try{return ST?ST.getItem(k):(MEM[k]||null);}catch(e){return MEM[k]||null;}}
+function setIt(k,v){try{if(ST){ST.setItem(k,v);}else{MEM[k]=v;}}catch(e){MEM[k]=v;}}
+function delIt(k){try{if(ST){ST.removeItem(k);}else{delete MEM[k];}}catch(e){delete MEM[k];}}
+var CHAVE='cie9_reacaoemcadeia_quiz';
+
+/* Cada alternativa tem id. 'ok' guarda o ID da correta (nunca a posição). */
+var QS=[
+{id:1,area:'quim',q:"A frase &ldquo;na natureza nada se cria, nada se perde, tudo se transforma&rdquo; resume a Lei de Lavoisier. Segundo ela, num sistema fechado:",
+ alts:[
+  {id:'a',t:"a soma das massas dos reagentes é igual à soma das massas dos produtos.",e:"Correta. É a Lei da Conservação das Massas: num sistema fechado, a massa total não muda."},
+  {id:'b',t:"a massa dos produtos é sempre maior que a dos reagentes.",e:"Errada. A massa não aumenta nem diminui — ela se conserva."},
+  {id:'c',t:"parte da matéria é destruída durante a reação.",e:"Errada. Nenhuma matéria é destruída; os átomos apenas se reorganizam."},
+  {id:'d',t:"os gases produzidos sempre escapam, reduzindo a massa.",e:"Errada. Num sistema fechado nada escapa; é no sistema aberto que gases podem sair."}
+ ],ok:'a'},
+{id:2,area:'quim',q:"Numa reação feita em sistema fechado, 40 g de cálcio reagem totalmente com 16 g de oxigênio, formando cal. A massa de cal obtida é:",
+ alts:[
+  {id:'a',t:"56 g.",e:"Correta. Por Lavoisier, 40 g + 16 g = 56 g: a massa dos produtos é igual à dos reagentes."},
+  {id:'b',t:"24 g.",e:"Errada. 24 g seria 40 − 16, mas a reação SOMA as massas dos reagentes, não as subtrai."},
+  {id:'c',t:"40 g.",e:"Errada. 40 g é só a massa do cálcio; falta somar o oxigênio que também entrou na reação."},
+  {id:'d',t:"16 g.",e:"Errada. 16 g é só a massa do oxigênio."}
+ ],ok:'a'},
+{id:3,area:'quim',q:"Ao queimar uma folha de papel numa vasilha aberta, a massa que sobra parece diminuir. A explicação correta é que:",
+ alts:[
+  {id:'a',t:"parte da matéria virou gases que escaparam para o ar; num sistema fechado a massa total se manteria.",e:"Correta. A lei continua válida: num recipiente fechado, os gases ficariam retidos e a massa seria a mesma."},
+  {id:'b',t:"a Lei de Lavoisier foi desmentida, pois massa foi destruída.",e:"Errada. Massa não é destruída; ela apenas saiu na forma de gases."},
+  {id:'c',t:"o papel absorveu oxigênio do ar e ficou mais leve.",e:"Errada. Absorver matéria aumentaria a massa, não a reduziria."},
+  {id:'d',t:"a balança da experiência estava necessariamente quebrada.",e:"Errada. O efeito é real e esperado num sistema aberto: os gases da queima escaparam."}
+ ],ok:'a'},
+{id:4,area:'quim',q:"A água se forma sempre na proporção de 1 g de hidrogênio para 8 g de oxigênio (Lei de Proust). Se 3 g de hidrogênio reagirem totalmente, a massa de oxigênio consumida será:",
+ alts:[
+  {id:'a',t:"24 g.",e:"Correta. 3 g de hidrogênio × 8 = 24 g de oxigênio, mantendo a proporção 1 : 8."},
+  {id:'b',t:"8 g.",e:"Errada. 8 g seria o oxigênio para apenas 1 g de hidrogênio."},
+  {id:'c',t:"11 g.",e:"Errada. 11 g (3 + 8) mistura massas que não se somam assim; use a proporção."},
+  {id:'d',t:"16 g.",e:"Errada. 16 g seria o oxigênio para 2 g de hidrogênio, não para 3 g."}
+ ],ok:'a'},
+{id:5,area:'quim',q:"Juntam-se 2 g de hidrogênio e 24 g de oxigênio para formar água (proporção 1 : 8). Nessa reação:",
+ alts:[
+  {id:'a',t:"o hidrogênio é o reagente limitante e sobram 8 g de oxigênio.",e:"Correta. 2 g de hidrogênio só reagem com 16 g de oxigênio; dos 24 g, sobram 8 g de oxigênio em excesso."},
+  {id:'b',t:"o oxigênio é o reagente limitante e sobram 8 g de hidrogênio.",e:"Errada. Quem acaba primeiro é o hidrogênio; o oxigênio é que sobra."},
+  {id:'c',t:"os dois reagentes acabam exatamente ao mesmo tempo, sem sobras.",e:"Errada. Para 2 g de hidrogênio bastariam 16 g de oxigênio; havia 24 g, logo sobra oxigênio."},
+  {id:'d',t:"sobram 8 g de hidrogênio sem reagir.",e:"Errada. O hidrogênio reage todo; o que sobra é o oxigênio."}
+ ],ok:'a'},
+{id:6,area:'quim',q:"Na formação do vapor de água, 2 litros de gás hidrogênio reagem com 1 litro de gás oxigênio e formam 2 litros de vapor (relação de volumes 2 : 1 : 2). Essa relação em números inteiros e pequenos ilustra a lei de:",
+ alts:[
+  {id:'a',t:"Gay-Lussac (proporções volumétricas dos gases).",e:"Correta. É uma lei volumétrica: vale para gases nas mesmas condições de temperatura e pressão."},
+  {id:'b',t:"Lavoisier (conservação das massas).",e:"Errada. Lavoisier trata de massa, não de volume de gases."},
+  {id:'c',t:"Proust (proporções constantes em massa).",e:"Errada. Proust também é uma lei ponderal (de massa), não de volume."},
+  {id:'d',t:"nenhuma, pois volume de gás não segue proporção.",e:"Errada. Justamente o que Gay-Lussac mostrou é que os volumes seguem proporções inteiras e pequenas."}
+ ],ok:'a'},
+{id:7,area:'quim',q:"Entre as equações abaixo, a única que está corretamente BALANCEADA é:",
+ alts:[
+  {id:'a',t:"2 H<sub>2</sub> + O<sub>2</sub> &rarr; 2 H<sub>2</sub>O",e:"Correta. 4 hidrogênios e 2 oxigênios de cada lado — os átomos estão equilibrados."},
+  {id:'b',t:"H<sub>2</sub> + O<sub>2</sub> &rarr; H<sub>2</sub>O",e:"Errada. Há 2 oxigênios à esquerda e só 1 à direita: está desbalanceada."},
+  {id:'c',t:"H<sub>2</sub> + Cl<sub>2</sub> &rarr; H<sub>2</sub>Cl<sub>2</sub>",e:"Errada. Aqui mudaram o índice da fórmula (H<sub>2</sub>Cl<sub>2</sub> não existe). O correto é H<sub>2</sub> + Cl<sub>2</sub> &rarr; 2 HCl."},
+  {id:'d',t:"N<sub>2</sub> + O<sub>2</sub> &rarr; NO<sub>2</sub>",e:"Errada. À esquerda há 2 oxigênios e à direita também 2, mas faltam nitrogênios: o certo é N<sub>2</sub> + 2 O<sub>2</sub> &rarr; 2 NO<sub>2</sub>."}
+ ],ok:'a'},
+{id:8,area:'bio',q:"Segundo a definição da ONU, biotecnologia é toda aplicação tecnológica que:",
+ alts:[
+  {id:'a',t:"utiliza seres vivos ou seus derivados para fabricar ou modificar produtos ou processos.",e:"Correta. É o uso da 'vida' (microrganismos, plantas, animais, genes) como ferramenta tecnológica."},
+  {id:'b',t:"estuda apenas fósseis e a evolução das espécies.",e:"Errada. Isso é paleontologia/evolução, não biotecnologia."},
+  {id:'c',t:"produz energia somente a partir de combustíveis fósseis.",e:"Errada. Combustíveis fósseis não são 'seres vivos sendo usados como tecnologia'."},
+  {id:'d',t:"fabrica produtos exclusivamente sem nenhum ser vivo envolvido.",e:"Errada. É justamente o contrário: a biotecnologia depende de seres vivos ou seus derivados."}
+ ],ok:'a'},
+{id:9,area:'bio',q:"O termo &ldquo;biotecnologia&rdquo; foi cunhado por Karl Ereky em 1917, mas fazer pães e queijos já é um exemplo ANTIGO de biotecnologia porque:",
+ alts:[
+  {id:'a',t:"usa microrganismos (seres vivos) para fabricar ou transformar alimentos.",e:"Correta. Mesmo sem conhecer os microrganismos, as pessoas já aplicavam a ideia da definição."},
+  {id:'b',t:"foram inventados depois do Projeto Genoma Humano.",e:"Errada. Pães e queijos são milenares, muito anteriores ao Projeto Genoma (1990-2003)."},
+  {id:'c',t:"não envolvem nenhum ser vivo na sua produção.",e:"Errada. Envolvem microrganismos, que são seres vivos — por isso são biotecnologia."},
+  {id:'d',t:"só podem ser feitos em laboratórios modernos.",e:"Errada. São feitos há milhares de anos, sem laboratório; biotecnologia não é só coisa moderna."}
+ ],ok:'a'},
+{id:10,area:'bio',q:"O sangue do caranguejo-ferradura é usado para detectar contaminação em medicamentos e equipamentos médicos. Esse é um exemplo de biotecnologia da cor:",
+ alts:[
+  {id:'a',t:"azul, por usar um recurso biológico marinho.",e:"Correta. A cor azul reúne a biotecnologia ligada aos recursos biológicos do mar."},
+  {id:'b',t:"vermelha, por ser da área da saúde.",e:"Errada. Apesar de ajudar na saúde, o critério das cores aqui é a origem marinha do recurso: azul."},
+  {id:'c',t:"verde, por estar ligada à agricultura.",e:"Errada. Verde é agricultura (plantas modificadas), não recursos do mar."},
+  {id:'d',t:"branca, por ser um processo industrial.",e:"Errada. Branca é a biotecnologia de processos industriais."}
+ ],ok:'a'},
+{id:11,area:'bio',q:"A biotecnologia da cor VERMELHA está ligada principalmente à área de:",
+ alts:[
+  {id:'a',t:"saúde — fármacos, vacinas e diagnósticos.",e:"Correta. Vermelha = saúde."},
+  {id:'b',t:"agricultura — sementes e plantas modificadas.",e:"Errada. Essa é a cor verde."},
+  {id:'c',t:"recursos biológicos do mar.",e:"Errada. Essa é a cor azul."},
+  {id:'d',t:"processos industriais.",e:"Errada. Essa é a cor branca."}
+ ],ok:'a'},
+{id:12,area:'bio',q:"A técnica do DNA recombinante permite inserir um gene de uma espécie no genoma de outra. Isso só é possível porque:",
+ alts:[
+  {id:'a',t:"o DNA de todos os seres vivos tem a mesma composição química.",e:"Correta. Como é a mesma 'linguagem' molecular, um gene de uma espécie pode funcionar em outra."},
+  {id:'b',t:"todos os seres vivos têm exatamente os mesmos genes.",e:"Errada. Os genes são diferentes; o que é igual é a composição química do DNA."},
+  {id:'c',t:"o gene transferido apaga todo o DNA original da célula.",e:"Errada. O gene é inserido no genoma; não apaga o DNA que já existia."},
+  {id:'d',t:"apenas bactérias conseguem receber genes de outras espécies.",e:"Errada. Plantas, peixes e outros organismos também podem receber genes (soja, GloFish etc.)."}
+ ],ok:'a'},
+{id:13,area:'bio',q:"Bactérias Escherichia coli transgênicas são muito usadas na produção, em larga escala, de:",
+ alts:[
+  {id:'a',t:"insulina humana, importante para o tratamento do diabetes.",e:"Correta. A bactéria recebe o gene humano da insulina e passa a produzi-la."},
+  {id:'b',t:"betacaroteno, como no arroz-dourado.",e:"Errada. O betacaroteno é o exemplo do arroz-dourado, uma planta transgênica."},
+  {id:'c',t:"fluorescência sob luz ultravioleta, como nos peixes GloFish.",e:"Errada. A fluorescência (gene GFP de água-viva) é o exemplo dos peixes GloFish."},
+  {id:'d',t:"placas solares para gerar energia elétrica.",e:"Errada. Isso não tem relação com bactérias transgênicas."}
+ ],ok:'a'},
+{id:14,area:'bio',q:"Sobre as células-tronco totipotentes e pluripotentes, é correto afirmar que:",
+ alts:[
+  {id:'a',t:"as totipotentes (fase de mórula) formam qualquer tecido E os anexos embrionários; as pluripotentes (fase de blástula) formam tecidos, mas NÃO os anexos.",e:"Correta. A diferença-chave é que só a totipotente forma anexos como placenta e cordão umbilical."},
+  {id:'b',t:"as pluripotentes formam os anexos embrionários e as totipotentes não.",e:"Errada. Os papéis estão trocados: quem forma os anexos é a totipotente."},
+  {id:'c',t:"ambas formam apenas um único tipo de célula.",e:"Errada. Isso descreve as unipotentes; toti e pluri formam vários tipos."},
+  {id:'d',t:"as duas vêm de tecidos adultos já formados.",e:"Errada. Elas vêm do embrião; quem vem de tecidos adultos são as multi/unipotentes."}
+ ],ok:'a'},
+{id:15,area:'bio',q:"A ovelha Dolly e os gêmeos univitelinos são, respectivamente, exemplos de clonagem:",
+ alts:[
+  {id:'a',t:"artificial (transplante de núcleo em laboratório) e natural (mesmo DNA, de um só embrião).",e:"Correta. Dolly foi feita em laboratório; os gêmeos univitelinos surgem naturalmente com DNA idêntico."},
+  {id:'b',t:"natural e artificial, nessa ordem.",e:"Errada. A ordem está invertida: Dolly é artificial, os gêmeos são naturais."},
+  {id:'c',t:"terapêutica e reprodutiva, nessa ordem.",e:"Errada. Esses são tipos de clonagem pelo objetivo, e não se aplicam assim aos dois casos."},
+  {id:'d',t:"as duas são exemplos de clonagem natural.",e:"Errada. A Dolly foi produzida artificialmente, por transplante de núcleo."}
+ ],ok:'a'}
+];
+
+/* ===== embaralhamento com semente fixa (mulberry32) ===== */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function embaralhar(arr,semente){
+  var r=mulberry32(semente),a=arr.slice(),i,j,t;
+  for(i=a.length-1;i>0;i--){ j=Math.floor(r()*(i+1)); t=a[i];a[i]=a[j];a[j]=t; }
+  return a;
+}
+var ORD={};
+for(var i=0;i<QS.length;i++){ ORD[QS[i].id]=embaralhar(QS[i].alts,QS[i].id*7919+13); }
+var LETRA=['a','b','c','d'];
+var NOMEAREA={quim:'Química',bio:'Biologia'};
+
+var D={resp:{},enviado:false,codigo:'',gab:false};
+function salvar(){D.quando=new Date().toLocaleString('pt-BR');setIt(CHAVE,JSON.stringify(D));var q=document.getElementById('quando');if(q)q.textContent=D.quando;}
+function carregar(){var r=getIt(CHAVE);if(r){try{var o=JSON.parse(r);if(o&&typeof o==='object'){D=o;if(!D.resp)D.resp={};}}catch(e){}}var q=document.getElementById('quando');if(q)q.textContent=D.quando||'ainda não salvo';}
+
+function render(){
+  var c=document.getElementById('qs'); c.innerHTML='';
+  for(var i=0;i<QS.length;i++){
+    var Q=QS[i], alts=ORD[Q.id], marc=D.resp[Q.id];
+    var d=document.createElement('div'); d.className='q';
+    var h='<div class="qhead"><span class="qn">Questão '+(i+1)+' de 15</span><span class="badge '+Q.area+'">'+NOMEAREA[Q.area]+'</span></div><div class="qt">'+Q.q+'</div>';
+    for(var a=0;a<alts.length;a++){
+      var A=alts[a], cls='alt', ex='', exc='exp';
+      if(marc===A.id) cls+=' sel';
+      if(D.enviado&&D.gab){
+        if(A.id===Q.ok){ cls='alt cta'; exc='exp on v'; }
+        else if(marc===A.id){ cls='alt err'; exc='exp on'; }
+        else { cls='alt neu'; exc='exp on'; }
+        ex='<div class="'+exc+'">'+A.e+'</div>';
+      }
+      h+='<label class="'+cls+'"><input type="radio" name="q'+Q.id+'" value="'+A.id+'"'+(marc===A.id?' checked':'')+(D.enviado?' disabled':'')+' onchange="responder('+Q.id+',this.value)">'+
+         '<b>'+LETRA[a]+')</b> '+A.t+'</label>'+ex;
+    }
+    d.innerHTML=h; c.appendChild(d);
+  }
+  document.getElementById('env').style.display=D.enviado?'none':'block';
+  document.getElementById('cod').className='codigo'+(D.enviado?' on':'');
+  document.getElementById('gate').className='gate'+((D.enviado&&!D.gab)?' on':'');
+  if(D.enviado){
+    document.getElementById('codbig').textContent=D.codigo;
+    document.getElementById('acertos').textContent=contar();
+  }
+  attBarra(); attEnv();
+}
+function responder(id,val){ D.resp[id]=val; salvar(); attBarra(); attEnv();
+  var ls=document.getElementsByName('q'+id);
+  for(var i=0;i<ls.length;i++){ ls[i].parentNode.className='alt'+(ls[i].value===val?' sel':''); }
+}
+function attBarra(){var n=0;for(var i=0;i<QS.length;i++){if(D.resp[QS[i].id])n++;}document.getElementById('barra').style.width=(n/QS.length*100)+'%';}
+function attEnv(){var n=0;for(var i=0;i<QS.length;i++){if(D.resp[QS[i].id])n++;}var b=document.getElementById('env');if(b)b.disabled=(n<QS.length);}
+function contar(){var n=0;for(var i=0;i<QS.length;i++){if(D.resp[QS[i].id]===QS[i].ok)n++;}return n;}
+function gerarCod(ac){
+  var L='ABCDEFGHJKLMNPQRSTUVWXYZ';
+  var s=L.charAt(Math.floor(Math.random()*L.length))+L.charAt(Math.floor(Math.random()*L.length));
+  var xx=(ac<10?'0':'')+ac;
+  return 'MED-'+xx+'-'+s;
+}
+var acaoModal=null;
+function enviar(){
+  acaoModal=function(){
+    D.enviado=true; D.codigo=gerarCod(contar()); salvar(); render(); fecharModal();
+    document.getElementById('cod').scrollIntoView({behavior:'smooth',block:'center'});
+  };
+  document.getElementById('mdlt').textContent='Enviar as respostas?';
+  document.getElementById('mdlp').textContent='Depois de enviar não dá para mudar nenhuma resposta. Quer enviar agora?';
+  document.getElementById('mdl').className='modal on';
+}
+function abrirGab(){
+  var v=(document.getElementById('codin').value||'').trim().toUpperCase();
+  if(v===D.codigo){ D.gab=true; salvar(); render(); }
+  else{ document.getElementById('gmsg').className='msg err'; }
+}
+function exportar(){
+  var det=[];
+  for(var i=0;i<QS.length;i++){
+    var Q=QS[i],m=D.resp[Q.id]||null,tx='';
+    for(var a=0;a<Q.alts.length;a++){ if(Q.alts[a].id===m) tx=Q.alts[a].t; }
+    det.push({n:i+1,area:NOMEAREA[Q.area],pergunta:Q.q,marcou:tx,correta:(m===Q.ok)});
+  }
+  var out={material:'Quiz',kit:'Reação em Cadeia — Ciências 9º ano',quando:D.quando||'',enviado:D.enviado,codigo:D.codigo,acertos:contar(),total:15,questoes:det};
+  var bl=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  var a2=document.createElement('a'); a2.href=URL.createObjectURL(bl); a2.download='quiz-ciencias9.json'; a2.click();
+}
+function importar(ev){
+  var f=ev.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(x){ try{ var o=JSON.parse(x.target.result);
+    if(o&&o.questoes){ D.enviado=!!o.enviado; D.codigo=o.codigo||''; salvar(); render(); } }catch(e){} };
+  r.readAsText(f); ev.target.value='';
+}
+function pedirZerar(){
+  acaoModal=function(){ delIt(CHAVE); D={resp:{},enviado:false,codigo:'',gab:false}; salvar(); render(); fecharModal(); };
+  document.getElementById('mdlt').textContent='Zerar tudo?';
+  document.getElementById('mdlp').textContent='Isso apaga todas as respostas e o código deste Quiz. Não dá para desfazer.';
+  document.getElementById('mdl').className='modal on';
+}
+function mdlOk(){ if(acaoModal) acaoModal(); }
+function fecharModal(){ document.getElementById('mdl').className='modal'; acaoModal=null; }
+
+carregar(); render();
+</script>
+</body>
+</html>
